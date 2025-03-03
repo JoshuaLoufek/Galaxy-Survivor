@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6029443253186319744}
   - component: {fileID: 2910375841145563028}
   - component: {fileID: 7661185384468648091}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlobEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

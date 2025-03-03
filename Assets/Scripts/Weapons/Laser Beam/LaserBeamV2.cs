@@ -3,17 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBeamV2 : MonoBehaviour
+public class LaserBeamV2 : WeaponBase
 {
     public LayerMask obstacleLayers;
     public LayerMask hitLayers;
 
-    [SerializeField] private float distance = 100f;
+    [SerializeField] private float distance = 10f;
     public Transform firePoint;
     public Transform firePointRotator;
     public LineRenderer attackingLaserRenderer;
     public LineRenderer targetingLaserRenderer;
-    public int helloworld;
     Transform m_transform;
 
     // Variables that are critical to the function of the laser
@@ -26,12 +25,11 @@ public class LaserBeamV2 : MonoBehaviour
 
     // Variables I can use to adjust the behavior of the laser
     public float radius = .5f;
-    public int damage = 1;
-    public float cooldown = 3f;
-    public float duration = 1f;
-    public float rotationSpeed = 10f; // Represents degrees per second
+    // public int damage = 1; // REPLACED BY WEAPONSTATS.DAMAGE
+    // public float cooldown = 3f; // REPLACED BY WEAPONSTATS.TIMETOATTACK
+    public float duration = 2f;
+    public float rotationSpeed = 30f; // Represents degrees per second
     
-
     PlayerController playerController;
 
     void Awake()
@@ -40,7 +38,8 @@ public class LaserBeamV2 : MonoBehaviour
         playerController = GetComponentInParent<PlayerController>();
     }
 
-    void Update()
+    // override the default weapon behavior
+    public override void Update()
     {
         if (playerController.aiming) RotateFirePoint(); // If the player is aiming, rotate the fire point.
         UpdateLaserPositionVariables(); // Update all the variables that are needed to properly display the laser.
@@ -50,7 +49,7 @@ public class LaserBeamV2 : MonoBehaviour
             // The laser fires for a certain duration
             if (durationTimer > duration) // if the time is up, the laser stops firing and the timer resets
             {
-                ShootDamagingLaser();
+                Attack();
                 isFiring = false;
                 attackingLaserRenderer.enabled = false;
                 durationTimer = 0f;
@@ -58,14 +57,14 @@ public class LaserBeamV2 : MonoBehaviour
             else // Otherwise the laser keeps firing (or starts if this is the first time here).
             {
                 attackingLaserRenderer.enabled = true;
-                ShootDamagingLaser();
+                Attack();
                 durationTimer += Time.deltaTime;
             }
             
         } else
         {
             // There is a cooldown period between shots
-            if (cooldownTimer > cooldown) // if the time is up, the laser starts firing again and the timer resets
+            if (cooldownTimer > weaponStats.timeToAttack) // if the time is up, the laser starts firing again and the timer resets
             {
                 ShootTargetingLaser();
                 isFiring = true;
@@ -81,7 +80,7 @@ public class LaserBeamV2 : MonoBehaviour
         }
     }
 
-    void ShootDamagingLaser()
+    public override void Attack()
     {
         RaycastHit2D hit_obstacle; // Gets the first valid obstacle hit (if any)
         RaycastHit2D[] hit_enemies; // Does need to be an array. Want to return all enemies hit by the beam.
@@ -111,7 +110,7 @@ public class LaserBeamV2 : MonoBehaviour
             // Verifies that the found object was an enemy
             if (enemy != null)
             {
-                enemy.TakeDamage(damage); // Damages the enemy
+                enemy.TakeDamage(weaponStats.damage); // Damages the enemy
             }
         }
     }

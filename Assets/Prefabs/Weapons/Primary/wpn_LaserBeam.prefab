@@ -223,6 +223,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7bc89dfd39436240bdea284f2b725f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultWeaponData: {fileID: 11400000, guid: 4ad7b35376d4eef4283bf6dad3e53655, type: 2}
+  weaponStats:
+    damage: 0
+    timeToAttack: 0
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 192
@@ -234,7 +238,6 @@ MonoBehaviour:
   firePointRotator: {fileID: 2339320747516145982}
   attackingLaserRenderer: {fileID: 31252724612121733}
   targetingLaserRenderer: {fileID: 826683104092638585}
-  helloworld: 0
   radius: 0.5
   damage: 1
   cooldown: 3
