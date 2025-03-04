@@ -20,6 +20,7 @@ public abstract class WeaponBase : MonoBehaviour
     }
 
     // Uses the scriptable object that holds the default weapon stats
+    // Called from the weapon manager after the weapon is created (instantiated)
     public virtual void InitializeWeaponData(WeaponData wd)
     {
         defaultWeaponData = wd;

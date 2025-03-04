@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class SpiralOrbitalProjectile : MonoBehaviour, IProjectile
+public class SpiralOrbitalProjectile : MonoBehaviour
 {
     float radius; 
     float moveSpeed;
@@ -61,10 +61,11 @@ public class SpiralOrbitalProjectile : MonoBehaviour, IProjectile
         transform.position = new Vector2(xPos, yPos);
     }
 
-    public void InitializeProjectile(Transform pt, float x, float y)
+    public void InitializeProjectile(Transform pt, float x, float y, int dmg)
     {
         playerTransform = pt;
         transform.position = new Vector2(pt.position.x, pt.position.y);
+        damage = dmg;
     }
 
     // This function is called whenever the yoyo comes into contact with a (collider + rigidbody) object.
