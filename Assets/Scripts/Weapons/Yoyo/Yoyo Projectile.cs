@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class YoyoProjectile : MonoBehaviour, IProjectile
+public class YoyoProjectile : MonoBehaviour
 {
     Rigidbody2D myRB;
     public Transform playerTransform;
@@ -39,11 +39,12 @@ public class YoyoProjectile : MonoBehaviour, IProjectile
         myRB.AddForce(new Vector2(x, y).normalized * returnForce * Time.deltaTime);
     }
 
-    public void InitializeProjectile(Transform pt, float x, float y)
+    public void InitializeProjectile(Transform pt, float x, float y, int dmg)
     {
         playerTransform = pt;
         myRB.velocity = new Vector3(x, y).normalized * initialVelocity;
         transform.position = pt.position; // center the yoyo on the player to start
+        damage = dmg;
     }
 
     // This function is called whenever the yoyo comes into contact with a (collider + rigidbody) object.

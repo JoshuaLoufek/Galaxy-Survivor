@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LaserBulletProjectile : MonoBehaviour, IProjectile
+public class LaserBulletProjectile : MonoBehaviour
 {
+    // GLOBAL VARIABLES =============================================================================
+
     Rigidbody2D myRB;
     Vector3 direction;
     [SerializeField] float speed = 1f;
@@ -12,10 +14,29 @@ public class LaserBulletProjectile : MonoBehaviour, IProjectile
     [SerializeField] int pierce = 1; // Represents how many enemies the bullet can hit before being destroyed
     [SerializeField] float lifespan = 5f;
 
+    // INITIALIZATION FUNCTIONS =====================================================================
+
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
     }
+
+    public void InitializeProjectile(Transform pt, float x, float y, int dmg)
+    {
+        transform.position = pt.position; // center the bullet on the player to start
+
+        // Sets the direction the bullet will travel in
+        direction = new Vector3(x, y);
+
+        // Rotates the bullet so it's aligned properly
+        float z = -90 + (Mathf.Atan2(y, x) * (180 / Mathf.PI));
+        transform.localRotation = Quaternion.Euler(0, 0, z);
+
+        // Sets the damage (and other stats eventually)
+        damage = dmg;
+    }
+
+    // UPDATE FUNCTION ==============================================================================
 
     void Update()
     {
@@ -27,6 +48,8 @@ public class LaserBulletProjectile : MonoBehaviour, IProjectile
         lifespan -= Time.deltaTime;
         if (lifespan <= 0) DestroySelf();
     }
+
+    // HELPER FUNCTIONs =============================================================================
 
     private void BulletMovement()
     {
@@ -51,17 +74,5 @@ public class LaserBulletProjectile : MonoBehaviour, IProjectile
     private void DestroySelf()
     {
         Destroy(gameObject);
-    }
-
-    public void InitializeProjectile(Transform pt, float x, float y)
-    {
-        transform.position = pt.position; // center the bullet on the player to start
-
-        // Sets the direction the bullet will travel in
-        direction = new Vector3(x, y);
-
-        // Rotates the bullet so it's aligned properly
-        float z = -90 + (Mathf.Atan2(y, x) * (180 / Mathf.PI));
-        transform.localRotation = Quaternion.Euler(0, 0, z);
     }
 }
