@@ -8,6 +8,6 @@ public class PickupHealth : MonoBehaviour, IPickUpObject
 
     public void OnPickUp(PlayerStats player)
     {
-        player.HealPlayer(heal);
+        player.Heal(heal);
     }
 }

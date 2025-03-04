@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        lastHorizontalVector = 1f;
+        lastVerticalVector = 1f;
     }
 
     // FixedUpdate is called once per "physics frame"

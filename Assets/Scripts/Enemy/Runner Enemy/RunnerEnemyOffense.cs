@@ -74,10 +74,10 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
 
     private void ContactAttack()
     {
-        if (contactDamageTimer >= contactDamageRate)
+        if (contactDamageTimer > contactDamageRate)
         {
-            playerHealth.DamagePlayer(contactDamage);
-            contactDamageTimer = contactDamageRate;
+            playerHealth.TakeDamage(contactDamage);
+            contactDamageTimer = 0f;
         }
     }
 }

@@ -19,7 +19,7 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
 
     [SerializeField] int contactDamage = 1;
     float contactDamageRate = 1f;
-    float timer = 0f;
+    float contactDamageTimer = 0f;
 
     // INITIALIZATION FUNCTIONS =====================================================================
 
@@ -27,6 +27,7 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
     {
         enemyRB = GetComponent<Rigidbody2D>();
         moveTimer = 0f;
+        contactDamageTimer = 0f;
     }
 
     public void InitializeEnemyOffense(GameObject target)
@@ -40,6 +41,8 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
 
     void Update()
     {
+        contactDamageTimer += Time.deltaTime;
+
         moveTimer += Time.deltaTime;
         if(moveTimer >= moveInterval)
         {
@@ -54,5 +57,23 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
     {
         Vector3 direction = (targetDestination.position - transform.position).normalized;
         enemyRB.AddForce(direction * moveForce);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        // checks if the object colliding with the enemy is the player
+        if (collision.gameObject == targetGameObject)
+        {
+            ContactAttack();
+        }
+    }
+
+    private void ContactAttack()
+    {
+        if (contactDamageTimer > contactDamageRate)
+        {
+            playerHealth.TakeDamage(contactDamage);
+            contactDamageTimer = 0f;
+        }
     }
 }

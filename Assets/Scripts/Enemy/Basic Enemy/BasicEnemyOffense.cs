@@ -17,14 +17,14 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
 
     [SerializeField] int contactDamage = 1;
     float contactDamageRate = 1f;
-    float timer = 0f;
+    float ContactDamageTimer = 0f;
 
     // INITIALIZATION FUNCTIONS =====================================================================
 
     private void Awake()
     {
         enemyRB = GetComponent<Rigidbody2D>();
-        timer = 0f;
+        ContactDamageTimer = 0f;
     }
 
     public void InitializeEnemyOffense(GameObject target)
@@ -39,9 +39,9 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
     void FixedUpdate()
     {
         MoveEnemy();
-        if (timer >= 0f) // Timer until the enemy can damage the player again
+        if (ContactDamageTimer >= 0f) // Timer until the enemy can damage the player again
         {
-            timer -= Time.deltaTime;
+            ContactDamageTimer -= Time.deltaTime;
         }
     }
 
@@ -58,16 +58,16 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
         // checks if the object colliding with the enemy is the player
         if (collision.gameObject == targetGameObject)
         {
-            Attack();
+            ContactAttack();
         }
     }
 
-    private void Attack()
+    private void ContactAttack()
     {
-        if (timer <= 0f)
+        if (ContactDamageTimer <= 0f)
         {
-            playerHealth.DamagePlayer(contactDamage);
-            timer = contactDamageRate;
+            playerHealth.TakeDamage(contactDamage);
+            ContactDamageTimer = contactDamageRate;
         }
     }
 }
