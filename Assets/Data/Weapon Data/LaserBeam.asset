@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a6e5e110c460042b484cbca7f8d69e, type: 3}
   m_Name: LaserBeam
   m_EditorClassIdentifier: 
-  Name: 
-  weaponPrefab: {fileID: 0}
+  Name: Laser Beam
+  weaponPrefab: {fileID: 1660883788491459259, guid: 2d4b4263257fb114a947c9a5e09feaec, type: 3}
   stats:
-    damage: 0
-    timeToAttack: 0
+    damage: 1
+    timeToAttack: 3
