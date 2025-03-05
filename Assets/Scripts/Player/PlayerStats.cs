@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     public int maxHealth = 10;
     public int currentHealth = 10;
     public int armor = 0;
+    public bool isDead;
 
     [SerializeField] StatusBar healthBar; // (static) set in inspector
     [HideInInspector] public Level level; // (dynamic) set on awake
@@ -20,6 +21,7 @@ public class PlayerStats : MonoBehaviour
     {
         level = GetComponent<Level>();
         money = GetComponent<Money>();
+        isDead = false;
     }
 
     // Start is called before the first frame update
@@ -32,13 +34,16 @@ public class PlayerStats : MonoBehaviour
 
     public void TakeDamage(int damage) // Takes a positive damage number
     {
+        if (isDead) return;
+        
         ApplyArmor(ref damage);
         
         currentHealth -= damage; // Damages the player
         healthBar.SetState(currentHealth, maxHealth); // Updates the player's hp bar
         if (currentHealth <= 0) // GAME OVER state
         {
-            print("Player has died! GAME OVER.");
+            GetComponent<CharacterGameOver>().GameOver();
+            isDead = true;
         }
     }
 
