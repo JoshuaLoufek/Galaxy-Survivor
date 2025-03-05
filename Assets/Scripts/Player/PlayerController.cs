@@ -107,4 +107,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
+    public void OnPause(InputValue escValue)
+    {
+        Debug.Log("pause button clicked");
+        
+    }
 }
