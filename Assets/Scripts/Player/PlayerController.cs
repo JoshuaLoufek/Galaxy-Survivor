@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,10 +17,12 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public Vector2 aimDirection; // Holds the direction of the player's aim
     public Transform aimTransform; // holds reference to the aim base object
     public Transform playerArtTransform; // holds reference to the player art object
-    public bool aiming = false;
+    [HideInInspector] public bool aiming = false;
 
     [HideInInspector] public float lastHorizontalVector;
     [HideInInspector] public float lastVerticalVector;
+
+    [SerializeField] private UnityEvent pauseGameEvent;
 
 
     // CRITICAL UNITY FUNCTIONS =====================================================================
@@ -110,7 +113,6 @@ public class PlayerController : MonoBehaviour
 
     public void OnPause(InputValue escValue)
     {
-        Debug.Log("pause button clicked");
-        
+        pauseGameEvent.Invoke();
     }
 }

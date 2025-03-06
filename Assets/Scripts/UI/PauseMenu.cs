@@ -7,25 +7,36 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pausePanel;
-    bool isPaused = false;
+    PauseManager pauseManager;
 
-    public void Awake()
+    private void Awake()
     {
-        isPaused = false;
+        pauseManager = GetComponent<PauseManager>();
     }
 
-    public void OnPause(InputValue escValue)
+    // This method is invoked by pauseGameEvent located in the PlayerController script
+    public void TogglePauseMenu()
     {
-        Debug.Log("pause button clicked");
-        if(isPaused)
+        if (pausePanel.activeInHierarchy) 
         {
-            pausePanel.SetActive(false);
-            isPaused = false;
+            CloseMenu(); 
         }
-        else
+        else 
         {
-            pausePanel.SetActive(true);
-            isPaused = true;
+            OpenMenu(); 
         }
+    }
+
+    public void OpenMenu()
+    {
+        pauseManager.PauseGame();
+        pausePanel.SetActive(true);
+    }
+
+    // This method is also invoked by the "Exit" button of the pause menu.
+    public void CloseMenu()
+    {
+        pauseManager.UnpauseGame();
+        pausePanel.SetActive(false);
     }
 }
