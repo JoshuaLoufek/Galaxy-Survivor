@@ -10,7 +10,7 @@ using UnityEngine;
 
 public class WorldScrolling : MonoBehaviour
 {
-    [SerializeField] Transform playerTransform;
+    Transform playerTransform;
     Vector2Int currentTilePosition = new Vector2Int(1,1);
     [SerializeField] Vector2Int playerTileCoordinates;
     [SerializeField] float tileSize;
@@ -32,6 +32,7 @@ public class WorldScrolling : MonoBehaviour
 
     private void Start()
     {
+        playerTransform = GameManager.instance.playerTransform;
         // UpdateTilesOnScreen();
     }
 

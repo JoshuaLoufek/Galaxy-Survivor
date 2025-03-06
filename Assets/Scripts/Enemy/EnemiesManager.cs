@@ -7,7 +7,7 @@ public class EnemiesManager : MonoBehaviour
     [SerializeField] GameObject enemy;
     [SerializeField] Vector2 spawnRect;
     [SerializeField] float spawnTimer;
-    [SerializeField] GameObject player;
+    GameObject player;
     float timer;
     [SerializeField] int maxSpawns = 10;
     int currentSpawns = 0;
@@ -17,6 +17,11 @@ public class EnemiesManager : MonoBehaviour
     {
         currentSpawns = 0;
         totalKills = 0;
+    }
+
+    private void Start()
+    {
+        player = GameManager.instance.playerTransform.gameObject;
     }
 
     private void FixedUpdate()
