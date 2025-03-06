@@ -45,4 +45,9 @@ public abstract class WeaponBase : MonoBehaviour
 
     // Each weapon will implement it's own unique attack method
     public abstract void Attack();
+
+    public virtual void PostDamage(int damage, Vector3 targetPosition)
+    {
+        MessageSystem.instance.PostMessage(damage.ToString(), targetPosition);
+    }
 }

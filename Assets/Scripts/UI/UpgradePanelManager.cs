@@ -7,21 +7,58 @@ public class UpgradePanelManager : MonoBehaviour
     [SerializeField] GameObject upgradePanel;
     PauseManager pauseManager;
 
+    [SerializeField] List<UpgradeButton> upgradeButtons;
+
     private void Awake()
     {
         pauseManager = GetComponent<PauseManager>();
     }
 
-
-    public void OpenPanel()
+    private void Start()
     {
+        DisableButtons();
+    }
+
+    public void OpenPanel(List<UpgradeData> upgradeDatas)
+    {
+        CleanPanel();
         pauseManager.PauseGame();
         upgradePanel.SetActive(true);
+
+        for (int i = 0; i < upgradeDatas.Count; i++)
+        {
+            upgradeButtons[i].gameObject.SetActive(true);
+            upgradeButtons[i].Set(upgradeDatas[i]);
+        }
     }
 
     public void ClosePanel()
     {
+        DisableButtons();
+
         pauseManager.UnpauseGame();
         upgradePanel.SetActive(false);
+    }
+
+    private void DisableButtons()
+    {
+        for (int i = 0; i < upgradeButtons.Count; i++)
+        {
+            upgradeButtons[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void Upgrade(int pressedButtonID)
+    {
+        GameManager.instance.playerTransform.GetComponent<Level>().Upgrade(pressedButtonID);
+        ClosePanel();
+    }
+
+    public void CleanPanel()
+    {
+        for (int i = 0; i < upgradeButtons.Count; i++)
+        {
+            upgradeButtons[i].Clean();
+        }
     }
 }
