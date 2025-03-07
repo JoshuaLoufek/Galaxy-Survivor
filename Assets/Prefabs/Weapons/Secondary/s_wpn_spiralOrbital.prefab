@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultWeaponData: {fileID: 11400000, guid: 7a06693169a82474dbfba4f82103c76f, type: 2}
   weaponStats:
-    damage: 0
-    timeToAttack: 0
+    damage: 2
+    timeToAttack: 2
   spiralOrbPrefab: {fileID: 1232110512195891563, guid: 8922b723bf0dc0148a202b1a2ddfc793, type: 3}

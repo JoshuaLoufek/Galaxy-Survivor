@@ -2633,8 +2633,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f0b3ce03496fe4a9464bd1d0000ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  currentHealth: 1
+  maxHealth: 10
+  currentHealth: 10
   armor: 0
   isDead: 0
   healthBar: {fileID: 1571099715}
@@ -2655,11 +2655,10 @@ MonoBehaviour:
   EXPBar: {fileID: 1594905310}
   upgradePanelManager: {fileID: 2080515005}
   upgrades:
-  - {fileID: 11400000, guid: 02b7acd10bf659c4fb9d7fbc10ce4fd6, type: 2}
-  - {fileID: 11400000, guid: 0289655d33ea0d6498438ceaf48f53b6, type: 2}
-  - {fileID: 11400000, guid: a9fdde0e1f2047247a01960a018c5e60, type: 2}
-  - {fileID: 11400000, guid: 11b14dc7fc01ed54483b7453b60a4601, type: 2}
-  acquiredUpgrades: []
+  - {fileID: 11400000, guid: 99e5918656e71004883394f9400ec7d5, type: 2}
+  - {fileID: 11400000, guid: 3d4061390f2b5dd4988c94fd8e198f6b, type: 2}
+  - {fileID: 11400000, guid: 76ab9706549824246bd52d6b3f0a3146, type: 2}
+  - {fileID: 11400000, guid: 44e64221d4470714fbf253537216ad07, type: 2}
   upgradesPerLevel: 4
 --- !u!114 &1315561541
 MonoBehaviour:

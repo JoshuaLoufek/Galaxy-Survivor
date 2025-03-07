@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
-    // GLOBAL VARIABLES =============================================================================
+    // GLOBAL VARIABLES ==========================================================================================
 
     Rigidbody2D myRB;
     

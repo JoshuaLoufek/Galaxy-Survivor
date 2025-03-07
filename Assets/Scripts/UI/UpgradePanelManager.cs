@@ -54,7 +54,7 @@ public class UpgradePanelManager : MonoBehaviour
         ClosePanel();
     }
 
-    public void CleanPanel()
+    public void CleanPanel() // cleans the sprites currently associated with button (set to null)
     {
         for (int i = 0; i < upgradeButtons.Count; i++)
         {
