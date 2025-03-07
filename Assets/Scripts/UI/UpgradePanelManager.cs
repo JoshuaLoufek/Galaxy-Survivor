@@ -48,6 +48,7 @@ public class UpgradePanelManager : MonoBehaviour
         }
     }
 
+    // This is called from the Upgrade Button OnClick event
     public void Upgrade(int pressedButtonID)
     {
         GameManager.instance.playerTransform.GetComponent<Level>().Upgrade(pressedButtonID);

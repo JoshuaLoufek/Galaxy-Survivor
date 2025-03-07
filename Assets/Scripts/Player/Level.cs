@@ -12,9 +12,9 @@ public class Level : MonoBehaviour
     [SerializeField] StatusBar EXPBar;
     [SerializeField] UpgradePanelManager upgradePanelManager;
 
-    [SerializeField] List<UpgradeData> upgrades;
+    [SerializeField] List<UpgradeData> availableUpgrades; // Upgrades the player can currently choose from when they level up.
+    [SerializeField] List<UpgradeData> acquiredUpgrades; // Upgrades the player has already recieved.
     List<UpgradeData> selectedUpgrades;
-    List<UpgradeData> acquiredUpgrades;
 
     [SerializeField] int upgradesPerLevel; // represents how many upgrades the player should be able to choose from each level
 
@@ -72,23 +72,25 @@ public class Level : MonoBehaviour
 
     // UPGRADE & UNLOCKS =========================================================================================
 
+    // This function chooses which upgrades to present to the player when they level up.
     public List<UpgradeData> GetUpgrades(int count)
     {
         List<UpgradeData> upgradeList = new List<UpgradeData>();
         
-        if (count > upgrades.Count) // if there aren't enough upgrades left, only get what we can
+        if (count > availableUpgrades.Count) // if there aren't enough upgrades left, only get what we can
         {
-            count = upgrades.Count;
+            count = availableUpgrades.Count;
         }
 
         for(int i = 0; i < count; i++)
         {
-            upgradeList.Add(upgrades[Random.Range(0, upgrades.Count)]);
+            upgradeList.Add(availableUpgrades[Random.Range(0, availableUpgrades.Count)]);
         }
 
         return upgradeList;
     }
 
+    // This function implements the upgrade chosen by the player. It is called from the UpgradePanelManager script.
     internal void Upgrade(int selectedUpgradeID)
     {
         UpgradeData upgradeData = selectedUpgrades[selectedUpgradeID];
@@ -100,6 +102,7 @@ public class Level : MonoBehaviour
                 weaponManager.AddWeapon(upgradeData.weaponData);
                 break;
             case UpgradeType.WeaponUpgrade:
+                weaponManager.UpgradeWeapon(upgradeData);
                 break;
             case UpgradeType.ItemUnlock:
                 break;
@@ -112,6 +115,11 @@ public class Level : MonoBehaviour
         }
 
         acquiredUpgrades.Add(upgradeData);
-        upgrades.Remove(upgradeData);
+        availableUpgrades.Remove(upgradeData);
+    }
+
+    internal void AddToListOfAvailableUpgrades(List<UpgradeData> upgradesToAdd)
+    {
+        availableUpgrades.AddRange(upgradesToAdd);
     }
 }

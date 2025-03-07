@@ -2398,7 +2398,7 @@ GameObject:
   - component: {fileID: 1315561544}
   m_Layer: 0
   m_Name: PlayerBase
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2654,11 +2654,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EXPBar: {fileID: 1594905310}
   upgradePanelManager: {fileID: 2080515005}
-  upgrades:
+  availableUpgrades:
   - {fileID: 11400000, guid: 99e5918656e71004883394f9400ec7d5, type: 2}
-  - {fileID: 11400000, guid: 3d4061390f2b5dd4988c94fd8e198f6b, type: 2}
   - {fileID: 11400000, guid: 76ab9706549824246bd52d6b3f0a3146, type: 2}
   - {fileID: 11400000, guid: 44e64221d4470714fbf253537216ad07, type: 2}
+  acquiredUpgrades: []
   upgradesPerLevel: 4
 --- !u!114 &1315561541
 MonoBehaviour:

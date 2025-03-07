@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,6 +42,8 @@ public abstract class WeaponBase : MonoBehaviour
         }
     }
 
+
+
     // ABSTRACT FUNCTIONS ===========================================================================
 
     // Each weapon will implement it's own unique attack method
@@ -49,5 +52,12 @@ public abstract class WeaponBase : MonoBehaviour
     public virtual void PostDamage(int damage, Vector3 targetPosition)
     {
         MessageSystem.instance.PostMessage(damage.ToString(), targetPosition);
+    }
+
+    // ===========================
+
+    public void Upgrade(UpgradeData upgradeData)
+    {
+        weaponStats.SumStats(upgradeData.weaponUpgradeStats);
     }
 }

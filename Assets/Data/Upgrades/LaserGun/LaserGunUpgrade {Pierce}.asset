@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b10953e95ce67364e98c042515c7008a, type: 3}
-  m_Name: pWpnGun
+  m_Name: LaserGunUpgrade {Pierce}
   m_EditorClassIdentifier: 
-  upgradeType: 0
-  Name: Laser Gun
-  icon: {fileID: 21300000, guid: 8bcdd0010df811b4491245148ed54a46, type: 3}
+  upgradeType: 1
+  Name: Laser Gun Pierce
+  icon: {fileID: 21300000, guid: 4386eb0f6e520ea458d495d89e1cfc87, type: 3}
   weaponData: {fileID: 11400000, guid: dbfe4ae9869cb3d4f86b0b2406883482, type: 2}
+  weaponUpgradeStats:
+    damage: 0
+    timeToAttack: 0
+    pierce: 1
