@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradePanelManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class UpgradePanelManager : MonoBehaviour
             upgradeButtons[i].gameObject.SetActive(true);
             upgradeButtons[i].Set(upgradeDatas[i]);
         }
+
+        upgradeButtons[0].gameObject.GetComponent<Button>().Select(); // sets the first button to be active by default
     }
 
     public void ClosePanel()
