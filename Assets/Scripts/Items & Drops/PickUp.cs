@@ -6,7 +6,7 @@ public class PickUp : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerHealth p = collision.GetComponent<PlayerHealth>();
+        Player p = collision.GetComponent<Player>();
         if (p != null)
         {
             GetComponent<IPickUpObject>().OnPickUp(p);

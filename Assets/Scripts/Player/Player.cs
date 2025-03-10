@@ -1,17 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
-    // Player Stats
+    public CoreStats coreStats;
+
+    // The player's max stats
+    public int maxHealth;
+    public int healthRegen;
+    public int armor = 0;
+
+    // "Current" stats
+    public int currentHealth;
+
+    public bool isDead;
+
+    [SerializeField] StatusBar healthBar; // (static) set in inspector
+    [HideInInspector] public Level level; // (dynamic) set on awake
+    [HideInInspector] public Money money; // (dyanmic) set on awake
+
+    // player controller global variables
 
     Rigidbody2D myRB;
-    
+
     Vector2 moveDirection; // Holds the direction of the player's movement
     public float moveSpeed;
     bool moving = false;
@@ -27,11 +43,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private UnityEvent pauseGameEvent;
 
 
-    // CRITICAL UNITY FUNCTIONS =====================================================================
+    // INITIALIZATION FUNCTIONS ==================================================================================
+
+    private void Awake()
+    {
+        coreStats = new CoreStats(0,0,0,0,0,0,0);
+        level = GetComponent<Level>();
+        money = GetComponent<Money>();
+        isDead = false;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = maxHealth;
         myRB = GetComponent<Rigidbody2D>();
         lastHorizontalVector = 1f;
         lastVerticalVector = 1f;
@@ -40,18 +65,56 @@ public class PlayerController : MonoBehaviour
     // FixedUpdate is called once per "physics frame"
     private void FixedUpdate()
     {
-        if(moving)
+        if (moving)
         {
             PlayerMovement();
         }
 
-        if(aiming)
+        if (aiming)
         {
             lastHorizontalVector = aimDirection.x;
             lastVerticalVector = aimDirection.y;
         }
     }
 
+    // HEALTH FUNCTIONS ==========================================================================================
+
+    public void TakeDamage(int damage) // Takes a positive damage number
+    {
+        if (isDead) return;
+        
+        ApplyArmor(ref damage);
+        
+        currentHealth -= damage; // Damages the player
+        healthBar.SetState(currentHealth, maxHealth); // Updates the player's hp bar
+        if (currentHealth <= 0) // GAME OVER state
+        {
+            GetComponent<CharacterGameOver>().GameOver();
+            isDead = true;
+        }
+    }
+
+    public void ApplyArmor(ref int damage)
+    {
+        damage -= armor;
+        if (damage <= 0) { damage = 0; }
+    }
+
+    public void Heal(int heal)
+    { 
+        if (currentHealth <= 0) { return; } // Early exit if the player is dead
+
+        currentHealth += heal; // Heals the player
+        if (currentHealth >= maxHealth) { currentHealth = maxHealth; } // Ensures Health doesn't go above max
+        healthBar.SetState(currentHealth, maxHealth); // Updates the player's hp bar
+    }
+
+    public void SetMaxHealth(int myMaxHealth)
+    {
+        print("Setting max health");
+        maxHealth = myMaxHealth;
+        currentHealth = myMaxHealth;
+    }
 
     // HELPER FUNCTIONS =============================================================================
 
@@ -60,7 +123,7 @@ public class PlayerController : MonoBehaviour
     {
         // Moves the player
         myRB.AddForce(new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed));
-        
+
         // Flips the player
         if (moveDirection.x >= 0)
         {
@@ -82,15 +145,16 @@ public class PlayerController : MonoBehaviour
     // PLAYER INPUT PROCESSING =====================================================================
 
     // Captures the player's intended movement direction and if they're currently trying to move.
-    public void OnMove(InputValue moveValue) 
+    public void OnMove(InputValue moveValue)
     {
         moveDirection = moveValue.Get<Vector2>().normalized;
 
         // Determines if the player is currently attempting to move
-        if(Mathf.Abs(moveDirection.magnitude) > 0)
+        if (Mathf.Abs(moveDirection.magnitude) > 0)
         {
             moving = true;
-        } else
+        }
+        else
         {
             moving = false;
         }
@@ -101,12 +165,13 @@ public class PlayerController : MonoBehaviour
     {
         aimDirection = aimValue.Get<Vector2>().normalized;
 
-        if(Mathf.Abs(aimDirection.magnitude) > 0)
+        if (Mathf.Abs(aimDirection.magnitude) > 0)
         {
             aiming = true;
             aimTransform.right = -aimDirection; // I have no idea why it has to be written like this to work, but so be it!
             // shipAimTransform.up = aimDirection; // rotates the player in the direction of their aim stick
-        } else
+        }
+        else
         {
             aiming = false;
         }

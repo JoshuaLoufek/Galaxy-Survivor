@@ -7,12 +7,12 @@ public class LaserGunWeapon : WeaponBase
 {
     [SerializeField] GameObject bulletPrefab;
 
-    PlayerController playerController;
+    Player playerController;
     Transform playerTransform;
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
+        playerController = GetComponentInParent<Player>();
         playerTransform = GetComponentInParent<Transform>();
     }
 

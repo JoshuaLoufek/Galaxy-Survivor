@@ -11,7 +11,7 @@ public class CharacterGameOver : MonoBehaviour
     {
         Debug.Log("Game Over");
 
-        GetComponent<PlayerController>().enabled = false;
+        GetComponent<Player>().enabled = false;
         
         playerWeapons.SetActive(false);
         gameOverPanel.SetActive(true);

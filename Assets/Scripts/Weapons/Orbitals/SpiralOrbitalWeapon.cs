@@ -6,12 +6,12 @@ public class SpiralOrbitalWeapon : WeaponBase
 {
     [SerializeField] GameObject spiralOrbPrefab;
 
-    PlayerController playerController;
+    Player playerController;
     Transform playerTransform;
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
+        playerController = GetComponentInParent<Player>();
         playerTransform = GetComponentInParent<Transform>();
     }
 

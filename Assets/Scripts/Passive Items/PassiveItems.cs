@@ -6,13 +6,13 @@ public class PassiveItems : MonoBehaviour
 {
     [SerializeField] List<Item> equippedItems;
 
-    PlayerHealth playerStats;
-    PlayerController playerController;
+    Player playerStats;
+    Player playerController;
 
     private void Awake()
     {
-        playerStats = GetComponent<PlayerHealth>();
-        playerController = GetComponent<PlayerController>();
+        playerStats = GetComponent<Player>();
+        playerController = GetComponent<Player>();
     }
 
     public void Equip(Item itemToEquip)

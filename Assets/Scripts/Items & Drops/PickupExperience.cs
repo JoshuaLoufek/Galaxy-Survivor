@@ -6,7 +6,7 @@ public class PickupExperience : MonoBehaviour, IPickUpObject
 {
     [SerializeField] int exp = 200;
 
-    public void OnPickUp(PlayerHealth player)
+    public void OnPickUp(Player player)
     {
         player.level.AddExperience(exp);
     }

@@ -17,13 +17,13 @@ public class Item : ScriptableObject
     public string Name;
     public ItemStats stats;
 
-    public void Equip(PlayerHealth playerStats, PlayerController playerController)
+    public void Equip(Player playerStats, Player playerController)
     {
         playerStats.armor += stats.armor;
         playerController.moveSpeed += stats.moveSpeed;
     }
 
-    public void Unequip(PlayerHealth playerStats, PlayerController playerController)
+    public void Unequip(Player playerStats, Player playerController)
     {
         playerStats.armor -= stats.armor;
         playerController.moveSpeed -= stats.moveSpeed;

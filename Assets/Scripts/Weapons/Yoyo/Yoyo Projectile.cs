@@ -62,7 +62,7 @@ public class YoyoProjectile : MonoBehaviour
         }
 
         // Used so that the yoyo projectile is destroyed upon returning to the player
-        PlayerHealth playerHealth = collision.GetComponent<PlayerHealth>();
+        Player playerHealth = collision.GetComponent<Player>();
         if (playerHealth != null)
         {
             if(playerContact > 0)

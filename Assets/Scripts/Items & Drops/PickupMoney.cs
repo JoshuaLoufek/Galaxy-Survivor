@@ -6,7 +6,7 @@ public class PickupMoney : MonoBehaviour, IPickUpObject
 {
     [SerializeField] int value = 200;
 
-    public void OnPickUp(PlayerHealth player)
+    public void OnPickUp(Player player)
     {
         player.money.AddMoney(value);
     }

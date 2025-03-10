@@ -6,12 +6,12 @@ public class YoyoWeapon : WeaponBase
 {
     [SerializeField] GameObject yoyoPrefab;
 
-    PlayerController playerController;
+    Player playerController;
     Transform playerTransform;
 
     private void Awake()
     {
-        playerController = GetComponentInParent<PlayerController>();
+        playerController = GetComponentInParent<Player>();
         playerTransform = GetComponentInParent<Transform>();
     }
 

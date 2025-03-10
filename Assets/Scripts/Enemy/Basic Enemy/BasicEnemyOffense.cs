@@ -9,7 +9,7 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
     // References to the player the enemy is tracking
     Transform targetDestination; // Set as the player's current location.
     GameObject targetGameObject; // A reference to the player game object that's created on awake.
-    PlayerHealth playerHealth; // A reference to the player health script.
+    Player playerHealth; // A reference to the player health script.
 
     // References to this enemy
     Rigidbody2D enemyRB;
@@ -31,7 +31,7 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
     {
         targetGameObject = target;
         targetDestination = target.transform;
-        playerHealth = target.GetComponent<PlayerHealth>();
+        playerHealth = target.GetComponent<Player>();
     }
 
     // UPDATE FUNCTIONS =============================================================================

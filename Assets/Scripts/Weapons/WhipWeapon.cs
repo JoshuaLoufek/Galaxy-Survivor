@@ -11,13 +11,13 @@ public class WhipWeapon : MonoBehaviour
     [SerializeField] GameObject leftWhipObject;
     [SerializeField] GameObject rightWhipObject;
 
-    PlayerController playerControlSystem; // An object that references a generic PlayerControlSystem (PCS) file
+    Player playerControlSystem; // An object that references a generic PlayerControlSystem (PCS) file
     [SerializeField] Vector2 whipAttackSize = new Vector2(4f, 2f);
     [SerializeField] int whipDamage = 1;
 
     private void Awake()
     {
-        playerControlSystem = GetComponentInParent<PlayerController>(); // Gets a reference the PCS currently in use
+        playerControlSystem = GetComponentInParent<Player>(); // Gets a reference the PCS currently in use
     }
 
     void Update()

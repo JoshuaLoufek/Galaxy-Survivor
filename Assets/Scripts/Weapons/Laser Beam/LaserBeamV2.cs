@@ -30,12 +30,12 @@ public class LaserBeamV2 : WeaponBase
     public float duration = 2f;
     public float rotationSpeed = 30f; // Represents degrees per second
     
-    PlayerController playerController;
+    Player playerController;
 
     void Awake()
     {
         m_transform = GetComponent<Transform>();
-        playerController = GetComponentInParent<PlayerController>();
+        playerController = GetComponentInParent<Player>();
     }
 
     // override the default weapon behavior

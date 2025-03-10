@@ -9,7 +9,7 @@ public class WeaponManager : MonoBehaviour
     // GLOBAL VARIABLES ==========================================================================================
 
     // Player Scripts
-    PlayerHealth playerStats;
+    Player playerStats;
     Level level;
     
     // Player Stats (Player bonuses that trickle down to all their weapons)
@@ -30,7 +30,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
-        playerStats = GetComponent<PlayerHealth>();
+        playerStats = GetComponent<Player>();
         UpdateStats();
 
         level = GetComponent<Level>();
