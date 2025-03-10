@@ -2,13 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
-    public int maxHealth = 10;
-    public int currentHealth = 10;
+    public CoreStats coreStats;
+
+    // The player's max stats
+    public int maxHealth;
+    public int healthRegen;
     public int armor = 0;
+
+    // "Current" stats
+    public int currentHealth;
+
     public bool isDead;
 
     [SerializeField] StatusBar healthBar; // (static) set in inspector
@@ -19,6 +26,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
+        coreStats = new CoreStats(0,0,0,0,0,0,0);
         level = GetComponent<Level>();
         money = GetComponent<Money>();
         isDead = false;

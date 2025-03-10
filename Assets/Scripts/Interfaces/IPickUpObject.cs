@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IPickUpObject
 {
-    public void OnPickUp(PlayerStats player);
+    public void OnPickUp(PlayerHealth player);
 }

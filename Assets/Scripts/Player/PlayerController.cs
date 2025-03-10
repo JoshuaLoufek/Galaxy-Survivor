@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
+    // Player Stats
+
     Rigidbody2D myRB;
     
     Vector2 moveDirection; // Holds the direction of the player's movement
