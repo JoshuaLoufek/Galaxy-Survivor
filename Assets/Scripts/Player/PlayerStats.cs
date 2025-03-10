@@ -7,6 +7,12 @@ public class PlayerStats : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
+    // Player Scripts
+    private PlayerController playerController;
+    private PlayerHealth playerHealth;
+    private PlayerWeapons playerWeapons;
+    private Level level;
+
     // CORE STATS
     public CoreStats coreStats;
 
@@ -37,6 +43,11 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
+        playerController = GetComponent<PlayerController>();
+        playerHealth = GetComponent<PlayerHealth>();
+        playerWeapons = GetComponent<PlayerWeapons>();
+        level = GetComponent<Level>();
+
         InitializeCoreStats();
         UpdateAllStats();
     }
@@ -160,18 +171,21 @@ public class PlayerStats : MonoBehaviour
     {
         // 10% bonus max health per level
         maxHealth = 0.1f * durability;
+        playerHealth.UpdateMaxHealth();
     }
 
     private void SetHealthRegen(int durability)
     {
         // 25% bonus HP regenerated per level
         healthRegen = 0.25f * durability;
+        playerHealth.UpdateHealthRegen();
     }
 
     private void SetDefense(int durability)
     {
         // 2 defense (damage blocked) per level
         defense = 2f * durability;
+        playerHealth.UpdateDefense();
     }
 
     // INTELLIGENCE -----------------------------------------------------------
