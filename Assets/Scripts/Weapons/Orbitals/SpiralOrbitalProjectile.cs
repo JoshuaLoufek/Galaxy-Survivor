@@ -73,7 +73,7 @@ public class SpiralOrbitalProjectile : MonoBehaviour
     {
         // Grabs the damagable interface of the object hit
         IDamageable enemy = collision.GetComponent<IDamageable>();
-        Debug.Log(enemy);
+
         // Verifies that the found object isn't null
         if (enemy != null)
         {

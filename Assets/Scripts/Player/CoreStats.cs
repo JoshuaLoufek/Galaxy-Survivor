@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class CoreStats : MonoBehaviour
+public class CoreStats
 {
-    // The "core" stats
+    // The Core Stats
     public int power;
     public int speed;
     public int durability;
@@ -27,6 +27,18 @@ public class CoreStats : MonoBehaviour
         this.luck = luck;
     }
 
-    // Functions
+    // Setter Functions
+    public void SetPower(int power) { this.power = power; }
 
+    public void SetSpeed(int speed) { this.speed = speed; }
+
+    public void SetDurability(int durability) { this.durability = durability; }
+
+    public void SetIntelligence(int intelligence) { this.intelligence = intelligence; }
+
+    public void SetAmplify(int amplify) { this.amplify = amplify; }
+
+    public void SetCapacity(int capacity) { this.capacity = capacity; }
+    
+    public void SetLuck(int luck) { this.luck = luck; }
 }

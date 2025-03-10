@@ -19,13 +19,13 @@ public class Item : ScriptableObject
 
     public void Equip(PlayerHealth playerStats, PlayerController playerController)
     {
-        playerStats.armor += stats.armor;
+        playerStats.defense += stats.armor;
         playerController.moveSpeed += stats.moveSpeed;
     }
 
     public void Unequip(PlayerHealth playerStats, PlayerController playerController)
     {
-        playerStats.armor -= stats.armor;
+        playerStats.defense -= stats.armor;
         playerController.moveSpeed -= stats.moveSpeed;
     }
 }

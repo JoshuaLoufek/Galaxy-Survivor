@@ -18,7 +18,7 @@ public class Level : MonoBehaviour
 
     [SerializeField] int upgradesPerLevel; // represents how many upgrades the player should be able to choose from each level
 
-    WeaponManager weaponManager;
+    PlayerWeapons weaponManager;
 
     int TO_LEVEL_UP
     {
@@ -32,7 +32,7 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
-        weaponManager = GetComponent<WeaponManager>();
+        weaponManager = GetComponent<PlayerWeapons>();
     }
 
     private void Start()

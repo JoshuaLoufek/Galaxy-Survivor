@@ -6,36 +6,73 @@ public class PlayerHealth : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
-    public CoreStats coreStats;
-
-    // The player's max stats
-    public int maxHealth;
-    public int healthRegen;
-    public int armor = 0;
-
-    // "Current" stats
-    public int currentHealth;
-
-    public bool isDead;
-
-    [SerializeField] StatusBar healthBar; // (static) set in inspector
+    // Player Scripts (and other objects)
     [HideInInspector] public Level level; // (dynamic) set on awake
     [HideInInspector] public Money money; // (dyanmic) set on awake
+    [HideInInspector] public PlayerStats playerStats; // (dynamic) set on awake
+    [SerializeField] StatusBar healthBar; // (static) set in inspector
+
+    // Base Stats (intended for stats that need a base value to be initialized)
+    private int baseMaxHealth;
+    private float baseHealthRegen;
+
+    // Max Stats (intended for stats that will have a current value that changes dynamically with gameplay) 
+    public int maxHealth;
+
+    // Current Stats (the stat that's "used" in practice)
+    public int currentHealth;
+    public float healthRegen; // hp regenerated per second
+    public float defense;
+
+    // Player States and other variables
+    public bool isDead;
+    private float regenPool;
 
     // INITIALIZATION FUNCTIONS ==================================================================================
 
     private void Awake()
     {
-        coreStats = new CoreStats(0,0,0,0,0,0,0);
         level = GetComponent<Level>();
         money = GetComponent<Money>();
-        isDead = false;
+        playerStats = GetComponent<PlayerStats>();
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        isDead = false;
+        regenPool = 0f;
+        InitializePlayerHealth();
+    }
+
+    private void InitializePlayerHealth()
+    {
+        baseMaxHealth = 100;
+        baseHealthRegen = 0.2f;
+
+        UpdateMaxHealth();
+        UpdateHealthRegen();
+        UpdateDefense();
+
         currentHealth = maxHealth;
+    }
+
+    // UPDATE FUNCTION ===========================================================================================
+
+    private void Update()
+    {
+        RegenHealth();
+    }
+
+    private void RegenHealth()
+    {
+        // The regen pool fills up to 1, and then overflows and heals the player
+        regenPool += healthRegen * Time.deltaTime;
+        if (regenPool >= 1f)
+        {
+            regenPool -= 1f;
+            Heal(1);
+        }
     }
 
     // HEALTH FUNCTIONS ==========================================================================================
@@ -44,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isDead) return;
         
-        ApplyArmor(ref damage);
+        ApplyDefense(ref damage);
         
         currentHealth -= damage; // Damages the player
         healthBar.SetState(currentHealth, maxHealth); // Updates the player's hp bar
@@ -55,9 +92,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void ApplyArmor(ref int damage)
+    private void ApplyDefense(ref int damage)
     {
-        damage -= armor;
+        damage -= (int)defense;
         if (damage <= 0) { damage = 0; }
     }
 
@@ -70,10 +107,23 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetState(currentHealth, maxHealth); // Updates the player's hp bar
     }
 
-    public void SetMaxHealth(int myMaxHealth)
+    // STATISTIC CALCULATOR FUNCTIONS =====================================================================================
+        // This is where the final, usable versions of each stat are calculated.
+        // They will be applied in the functions that are above.
+
+    public void UpdateMaxHealth()
     {
-        print("Setting max health");
-        maxHealth = myMaxHealth;
-        currentHealth = myMaxHealth;
+        maxHealth = (int)(baseMaxHealth * (1 + playerStats.maxHealth));
+    }
+
+    public void UpdateHealthRegen()
+    {
+        healthRegen = (baseHealthRegen * (1 + playerStats.healthRegen));
+        Debug.Log("Base Regen: " + baseHealthRegen + "\nCurrent Regen Set to: " + healthRegen);
+    }
+
+    public void UpdateDefense()
+    {
+        defense = (playerStats.defense);
     }
 }
