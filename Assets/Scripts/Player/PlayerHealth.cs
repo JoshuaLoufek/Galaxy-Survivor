@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -50,9 +48,9 @@ public class PlayerHealth : MonoBehaviour
         baseMaxHealth = 100;
         baseHealthRegen = 0.2f;
 
-        UpdateMaxHealth();
-        UpdateHealthRegen();
-        UpdateDefense();
+        CalculateMaxHealth();
+        CalculateHealthRegen();
+        CalculateDefense();
 
         currentHealth = maxHealth;
     }
@@ -64,6 +62,8 @@ public class PlayerHealth : MonoBehaviour
         RegenHealth();
     }
 
+    // HELPER FUNCTIONS ==========================================================================================
+
     private void RegenHealth()
     {
         // The regen pool fills up to 1, and then overflows and heals the player
@@ -74,8 +74,6 @@ public class PlayerHealth : MonoBehaviour
             Heal(1);
         }
     }
-
-    // HEALTH FUNCTIONS ==========================================================================================
 
     public void TakeDamage(int damage) // Takes a positive damage number
     {
@@ -95,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
     private void ApplyDefense(ref int damage)
     {
         damage -= (int)defense;
-        if (damage <= 0) { damage = 0; }
+        if (damage <= 1) { damage = 1; } // damage can't be reduced below 1
     }
 
     public void Heal(int heal)
@@ -111,19 +109,21 @@ public class PlayerHealth : MonoBehaviour
         // This is where the final, usable versions of each stat are calculated.
         // They will be applied in the functions that are above.
 
-    public void UpdateMaxHealth()
+    public void CalculateMaxHealth()
     {
         maxHealth = (int)(baseMaxHealth * (1 + playerStats.maxHealth));
+        // Debug.Log("Max Health Set: " + maxHealth);
     }
 
-    public void UpdateHealthRegen()
+    public void CalculateHealthRegen()
     {
         healthRegen = (baseHealthRegen * (1 + playerStats.healthRegen));
-        Debug.Log("Base Regen: " + baseHealthRegen + "\nCurrent Regen Set to: " + healthRegen);
+        // Debug.Log("Health Regen Set: " + healthRegen);
     }
 
-    public void UpdateDefense()
+    public void CalculateDefense()
     {
         defense = (playerStats.defense);
+        // Debug.Log("Defense Set: " + defense);
     }
 }

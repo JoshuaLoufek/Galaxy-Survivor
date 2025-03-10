@@ -47,4 +47,20 @@ public class PlayerWeapons : MonoBehaviour
         WeaponBase weaponToUpgrade = aquiredWeapons.Find(wd => wd.defaultWeaponData == upgradeData.weaponData);
         weaponToUpgrade.Upgrade(upgradeData);
     }
+
+    // STATISTIC CALCULATOR FUNCTIONS =====================================================================================
+        // This is where the final, usable versions of each stat are calculated.
+        // They will be applied in the functions that are above.
+
+    // This script is the exception to how the player controller and player health functions calculate their stats
+    // This script needs to pass the updates to all the weapons the player has aquired
+
+    public void UpdateWeaponStats()
+    {
+        foreach (WeaponBase weapon in aquiredWeapons)
+        {
+
+        }
+    }
+
 }

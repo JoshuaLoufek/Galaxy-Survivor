@@ -24,9 +24,9 @@ public class PlayerStats : MonoBehaviour
     public float attackSpeed;
     public float projectileSpeed;
     // DURABILITY
-    public float maxHealth;
-    public float healthRegen;
-    public float defense;
+    public float maxHealth; // done
+    public float healthRegen; // done
+    public float defense; // done
     // INTELLIGENCE
     public float bonusEXP;
     public float pickupRange;
@@ -167,25 +167,25 @@ public class PlayerStats : MonoBehaviour
         SetDefense(coreStats.durability);
     }
 
-    private void SetMaxHealth(int durability)
+    private void SetMaxHealth(int durability) // FUNCTIONAL
     {
         // 10% bonus max health per level
         maxHealth = 0.1f * durability;
-        playerHealth.UpdateMaxHealth();
+        playerHealth.CalculateMaxHealth();
     }
 
-    private void SetHealthRegen(int durability)
+    private void SetHealthRegen(int durability) // FUNCTIONAL
     {
         // 25% bonus HP regenerated per level
         healthRegen = 0.25f * durability;
-        playerHealth.UpdateHealthRegen();
+        playerHealth.CalculateHealthRegen();
     }
 
-    private void SetDefense(int durability)
+    private void SetDefense(int durability) // FUNCTIONAL
     {
         // 2 defense (damage blocked) per level
         defense = 2f * durability;
-        playerHealth.UpdateDefense();
+        playerHealth.CalculateDefense();
     }
 
     // INTELLIGENCE -----------------------------------------------------------

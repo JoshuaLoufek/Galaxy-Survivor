@@ -8,26 +8,29 @@ public class PlayerController : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
-    // Player Stats
+    // Scripts
 
+    // Game Objects
     Rigidbody2D myRB;
-    
-    Vector2 moveDirection; // Holds the direction of the player's movement
-    public float moveSpeed;
-    bool moving = false;
-
-    [HideInInspector] public Vector2 aimDirection; // Holds the direction of the player's aim
     public Transform aimTransform; // holds reference to the aim base object
     public Transform playerArtTransform; // holds reference to the player art object
-    [HideInInspector] public bool aiming = false;
 
+    // VARIABLES
+    // Movement
+    private Vector2 moveDirection; // Holds the direction of the player's movement
+    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public bool moving = false;
+    // Aim
+    [HideInInspector] public Vector2 aimDirection; // Holds the direction of the player's aim
     [HideInInspector] public float lastHorizontalVector;
     [HideInInspector] public float lastVerticalVector;
+    [HideInInspector] public bool aiming = false;
 
+    // Events
     [SerializeField] private UnityEvent pauseGameEvent;
 
 
-    // CRITICAL UNITY FUNCTIONS =====================================================================
+    // INITIALIZATION FUNCTIONS ==================================================================================
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,8 @@ public class PlayerController : MonoBehaviour
         lastHorizontalVector = 1f;
         lastVerticalVector = 1f;
     }
+
+    // UPDATE FUNCTIONS ==================================================================================
 
     // FixedUpdate is called once per "physics frame"
     private void FixedUpdate()
@@ -117,4 +122,10 @@ public class PlayerController : MonoBehaviour
     {
         pauseGameEvent.Invoke();
     }
+
+    // STATISTIC CALCULATOR FUNCTIONS =====================================================================================
+        // This is where the final, usable versions of each stat are calculated.
+        // They will be applied in the functions that are above.
+
+
 }
