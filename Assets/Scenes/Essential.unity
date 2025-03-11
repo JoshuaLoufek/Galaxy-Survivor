@@ -2248,6 +2248,86 @@ RectTransform:
   m_AnchoredPosition: {x: -0.5, y: -17}
   m_SizeDelta: {x: -1464, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1204878635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1204878636}
+  - component: {fileID: 1204878637}
+  - component: {fileID: 1204878638}
+  m_Layer: 0
+  m_Name: MagnetCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1204878636
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204878635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1315561533}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1204878637
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204878635}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
+--- !u!114 &1204878638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204878635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90746a0a9eb1794f99376fef7cc92f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1266504329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,6 +2502,7 @@ Transform:
   - {fileID: 1050541303}
   - {fileID: 1571099714}
   - {fileID: 1268901057}
+  - {fileID: 1204878636}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1315561534
@@ -2565,13 +2646,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07d096a620690a04296b2a1bc08dbd36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 30
-  aimDirection: {x: 0, y: 0}
+  playerStats: {fileID: 0}
   aimTransform: {fileID: 2000720488}
   playerArtTransform: {fileID: 854146402}
-  aiming: 0
+  baseMoveSpeed: 0
+  moveSpeed: 30
+  moving: 0
+  aimDirection: {x: 0, y: 0}
   lastHorizontalVector: 0
   lastVerticalVector: 0
+  aiming: 0
   pauseGameEvent:
     m_PersistentCalls:
       m_Calls:
@@ -2634,14 +2718,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f0b3ce03496fe4a9464bd1d0000ee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  healthRegen: 0
-  armor: 0
-  currentHealth: 10
-  isDead: 0
-  healthBar: {fileID: 1571099715}
   level: {fileID: 0}
   money: {fileID: 0}
+  playerStats: {fileID: 0}
+  healthBar: {fileID: 1571099715}
+  maxHealth: 10
+  currentHealth: 10
+  healthRegen: 0
+  defense: 0
+  isDead: 0
 --- !u!114 &1315561540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2714,7 +2799,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aeedb58b4f7cb8419031a41f8675fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreStats: {fileID: 0}
+  coreStats:
+    power: 0
+    speed: 0
+    durability: 0
+    intelligence: 0
+    amplify: 0
+    capacity: 0
+    luck: 0
   damage: 0
   pierce: 0
   moveSpeed: 0
@@ -2722,6 +2814,7 @@ MonoBehaviour:
   projectileSpeed: 0
   maxHealth: 0
   healthRegen: 0
+  defense: 0
   bonusEXP: 0
   pickupRange: 0
   aoe: 0
