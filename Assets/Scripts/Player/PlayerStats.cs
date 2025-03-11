@@ -20,7 +20,7 @@ public class PlayerStats : MonoBehaviour
     public float damage;
     public float pierce;
     // SPEED
-    public float moveSpeed;
+    public float moveSpeed; // done
     public float attackSpeed;
     public float projectileSpeed;
     // DURABILITY
@@ -141,10 +141,11 @@ public class PlayerStats : MonoBehaviour
         SetProjectileSpeed(coreStats.speed);
     }
 
-    private void SetMoveSpeed(float speed)
+    private void SetMoveSpeed(float speed) // FUNCTIONAL
     {
         // 10% bonus move speed per level
         moveSpeed = 0.1f * speed;
+        playerController.CalculateMoveSpeed();
     }
 
     private void SetAttackSpeed(int speed)

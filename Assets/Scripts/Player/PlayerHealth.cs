@@ -38,8 +38,6 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        isDead = false;
-        regenPool = 0f;
         InitializePlayerHealth();
     }
 
@@ -47,6 +45,9 @@ public class PlayerHealth : MonoBehaviour
     {
         baseMaxHealth = 100;
         baseHealthRegen = 0.2f;
+
+        isDead = false;
+        regenPool = 0f;
 
         CalculateMaxHealth();
         CalculateHealthRegen();

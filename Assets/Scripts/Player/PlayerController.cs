@@ -8,9 +8,8 @@ public class PlayerController : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
-    // Scripts
-
-    // Game Objects
+    // Scripts and Game Objects
+    [HideInInspector] public PlayerStats playerStats; // (dynamic) set on awake
     Rigidbody2D myRB;
     public Transform aimTransform; // holds reference to the aim base object
     public Transform playerArtTransform; // holds reference to the player art object
@@ -18,7 +17,8 @@ public class PlayerController : MonoBehaviour
     // VARIABLES
     // Movement
     private Vector2 moveDirection; // Holds the direction of the player's movement
-    [HideInInspector] public float moveSpeed;
+    public float baseMoveSpeed;
+    public float moveSpeed;
     [HideInInspector] public bool moving = false;
     // Aim
     [HideInInspector] public Vector2 aimDirection; // Holds the direction of the player's aim
@@ -32,15 +32,29 @@ public class PlayerController : MonoBehaviour
 
     // INITIALIZATION FUNCTIONS ==================================================================================
 
+    private void Awake()
+    {
+        playerStats = GetComponent<PlayerStats>();
+        myRB = GetComponent<Rigidbody2D>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        myRB = GetComponent<Rigidbody2D>();
-        lastHorizontalVector = 1f;
-        lastVerticalVector = 1f;
+        InitializePlayerController();
     }
 
-    // UPDATE FUNCTIONS ==================================================================================
+    private void InitializePlayerController()
+    {
+        baseMoveSpeed = 30f;
+        
+        lastHorizontalVector = 1f;
+        lastVerticalVector = 1f;
+
+        CalculateMoveSpeed();
+    }
+
+    // UPDATE FUNCTIONS ==========================================================================================
 
     // FixedUpdate is called once per "physics frame"
     private void FixedUpdate()
@@ -58,7 +72,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // HELPER FUNCTIONS =============================================================================
+    // HELPER FUNCTIONS ==========================================================================================
 
     // Applies the movement force to the player
     void PlayerMovement()
@@ -84,7 +98,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // PLAYER INPUT PROCESSING =====================================================================
+    // PLAYER INPUT PROCESSING ===================================================================================
 
     // Captures the player's intended movement direction and if they're currently trying to move.
     public void OnMove(InputValue moveValue) 
@@ -123,9 +137,13 @@ public class PlayerController : MonoBehaviour
         pauseGameEvent.Invoke();
     }
 
-    // STATISTIC CALCULATOR FUNCTIONS =====================================================================================
+    // STATISTIC CALCULATOR FUNCTIONS ============================================================================
         // This is where the final, usable versions of each stat are calculated.
         // They will be applied in the functions that are above.
 
-
+    public void CalculateMoveSpeed()
+    {
+        moveSpeed = baseMoveSpeed * (1 + playerStats.moveSpeed);
+        Debug.Log("Move Speed Set: " + moveSpeed);
+    }
 }
