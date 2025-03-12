@@ -5,10 +5,9 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
     Rigidbody2D rb;
-    bool magnetActivated;
-    Vector3 targetPosition;
-    public float moveSpeed = 5f;
     Transform targetTransform;
+    bool magnetActivated;
+    public float moveSpeed;
 
     private void Awake()
     {
@@ -19,8 +18,7 @@ public class PickUp : MonoBehaviour
     {
         if(magnetActivated)
         {
-            targetPosition = targetTransform.position;
-            Vector2 targetDirection = (targetPosition - transform.position).normalized;
+            Vector2 targetDirection = (targetTransform.position - transform.position).normalized;
             rb.velocity = new Vector2(targetDirection.x, targetDirection.y) * moveSpeed;
         }
     }

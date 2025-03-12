@@ -12,6 +12,7 @@ public class PlayerStats : MonoBehaviour
     private PlayerHealth playerHealth;
     private PlayerWeapons playerWeapons;
     private Level level;
+    private PlayerMagnet magnet;
 
     // CORE STATS
     public CoreStats coreStats;
@@ -29,7 +30,7 @@ public class PlayerStats : MonoBehaviour
     public float defense; // done
     // INTELLIGENCE
     public float bonusEXP;
-    public float pickupRange;
+    public float pickupRange; // done
     // AMPLIFY
     public float aoe;
     public float extraAttacks;
@@ -47,6 +48,7 @@ public class PlayerStats : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
         playerWeapons = GetComponent<PlayerWeapons>();
         level = GetComponent<Level>();
+        magnet = GetComponentInChildren<PlayerMagnet>();
 
         InitializeCoreStats();
         UpdateAllStats();
@@ -206,6 +208,7 @@ public class PlayerStats : MonoBehaviour
     {
         // 20% bonus pickup range per level
         pickupRange = 0.2f * intelligence;
+        magnet.CalculateMagnetRadius();
     }
 
     // AMPLIFY ----------------------------------------------------------------
