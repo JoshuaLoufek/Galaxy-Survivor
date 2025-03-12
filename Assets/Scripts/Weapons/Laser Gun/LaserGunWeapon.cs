@@ -24,6 +24,6 @@ public class LaserGunWeapon : WeaponBase
         shotBullet.transform.position = transform.position;
         // Set the travel direction and rotate the bullet to match
         shotBullet.GetComponent<LaserBulletProjectile>().InitializeProjectile
-            (playerTransform, playerController.lastHorizontalVector, playerController.lastVerticalVector, weaponStats.damage, this);
+            (playerTransform, playerController.lastHorizontalVector, playerController.lastVerticalVector, currentWeaponStats.damage, this);
     }
 }

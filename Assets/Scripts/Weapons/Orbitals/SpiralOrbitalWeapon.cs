@@ -23,7 +23,7 @@ public class SpiralOrbitalWeapon : WeaponBase
         shotBullet.transform.position = transform.position;
         // Set the travel direction and rotate the bullet to match
         shotBullet.GetComponent<SpiralOrbitalProjectile>().InitializeProjectile
-            (playerTransform, playerController.lastHorizontalVector, playerController.lastVerticalVector, weaponStats.damage);
+            (playerTransform, playerController.lastHorizontalVector, playerController.lastVerticalVector, currentWeaponStats.damage);
 
         // Sets the projectile to be a child of this weapon
         // projectile.transform.parent = transform; // This line was causing wonky projectile behavior for some weapons (laser gun)

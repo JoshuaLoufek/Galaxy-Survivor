@@ -16,8 +16,14 @@ public class WeaponData : ScriptableObject
 public class WeaponStats
 {
     public int damage;
-    public float timeToAttack;
     public int pierce;
+    public float timeToAttack;
+    public float projectileSpeed;
+    public float aoe;
+    public float extraAttacks;
+    public float attackDuration;
+    public float critChance;
+    public float critDamage;
 
     public WeaponStats(int damage, float timeToAttack) // Constructor object for weapon stats
     {

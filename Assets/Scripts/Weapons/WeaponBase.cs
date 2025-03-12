@@ -9,7 +9,12 @@ public abstract class WeaponBase : MonoBehaviour
     // GLOBAL VARIABLES =============================================================================
 
     public WeaponData defaultWeaponData; // This caries the DEFAULT weapon stats
-    public WeaponStats weaponStats; // The CURRENT weapon stats
+
+    public PlayerStats playerStats; // This carries the PLAYER BUFFS
+    // I need an object here to cover the current weapon upgrades
+    // I need an object here to cover player's held items
+
+    public WeaponStats currentWeaponStats; // The CURRENT weapon stats 
 
     float timer;
 
@@ -25,7 +30,7 @@ public abstract class WeaponBase : MonoBehaviour
     public virtual void InitializeWeaponData(WeaponData wd)
     {
         defaultWeaponData = wd;
-        weaponStats = new WeaponStats(wd.stats.damage, wd.stats.timeToAttack);
+        currentWeaponStats = new WeaponStats(wd.stats.damage, wd.stats.timeToAttack);
     }
 
     // UPDATE FUNCTION ==============================================================================
@@ -38,7 +43,7 @@ public abstract class WeaponBase : MonoBehaviour
         if (timer < 0f)
         {
             Attack();
-            timer = weaponStats.timeToAttack;
+            timer = currentWeaponStats.timeToAttack;
         }
     }
 
@@ -56,6 +61,63 @@ public abstract class WeaponBase : MonoBehaviour
 
     public void Upgrade(UpgradeData upgradeData)
     {
-        weaponStats.SumStats(upgradeData.weaponUpgradeStats);
+        currentWeaponStats.SumStats(upgradeData.weaponUpgradeStats);
+    }
+
+    // STATISTIC CALCULATOR FUNCTIONS ============================================================================
+        // This is where the final, usable versions of each stat are calculated.
+        // They will be applied in the functions that are above.
+
+    public virtual void CalculateDamage()
+    {
+        currentWeaponStats.damage = defaultWeaponData.stats.damage * (1
+            + (int)playerStats.damage
+            // + weaponBuffs
+            // + itemBuffs
+            );
+    }
+
+    public virtual void CalculatePierce()
+    {
+        currentWeaponStats.pierce = defaultWeaponData.stats.pierce * (1
+            + (int)playerStats.pierce
+            // + weaponBuffs
+            // + itemBuffs
+            );
+    }
+
+    public virtual void CalculateTimeToAttack()
+    {
+
+    }
+
+    public virtual void CalculateProjectileSpeed()
+    {
+
+    }
+
+    public virtual void CalculateAOE()
+    {
+
+    }
+
+    public virtual void CalculateExtraAttacks()
+    {
+
+    }
+
+    public virtual void CalculateAttackDuration()
+    {
+
+    }
+
+    public virtual void CalculateCritChance()
+    {
+
+    }
+
+    public virtual void CalculateCritDamage()
+    {
+
     }
 }

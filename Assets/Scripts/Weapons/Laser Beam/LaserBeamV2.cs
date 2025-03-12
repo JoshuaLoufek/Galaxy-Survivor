@@ -64,7 +64,7 @@ public class LaserBeamV2 : WeaponBase
         } else
         {
             // There is a cooldown period between shots
-            if (cooldownTimer > weaponStats.timeToAttack) // if the time is up, the laser starts firing again and the timer resets
+            if (cooldownTimer > currentWeaponStats.timeToAttack) // if the time is up, the laser starts firing again and the timer resets
             {
                 ShootTargetingLaser();
                 isFiring = true;
@@ -110,7 +110,7 @@ public class LaserBeamV2 : WeaponBase
             // Verifies that the found object was an enemy
             if (enemy != null)
             {
-                enemy.TakeDamage(weaponStats.damage); // Damages the enemy
+                enemy.TakeDamage(currentWeaponStats.damage); // Damages the enemy
             }
         }
     }
