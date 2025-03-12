@@ -42,8 +42,6 @@ public abstract class WeaponBase : MonoBehaviour
         }
     }
 
-
-
     // ABSTRACT FUNCTIONS ===========================================================================
 
     // Each weapon will implement it's own unique attack method
