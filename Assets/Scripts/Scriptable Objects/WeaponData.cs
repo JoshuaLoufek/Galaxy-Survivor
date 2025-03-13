@@ -15,8 +15,8 @@ public class WeaponData : ScriptableObject
 [Serializable]
 public class WeaponStats
 {
-    public int damage;
-    public int pierce;
+    public float damage { get; set; }
+    public float pierce;
     public float timeToAttack;
     public float projectileSpeed;
     public float aoe;
@@ -25,10 +25,24 @@ public class WeaponStats
     public float critChance;
     public float critDamage;
 
-    public WeaponStats(int damage, float timeToAttack) // Constructor object for weapon stats
+    // Empty constructor where the stats will be filled in later
+    public WeaponStats()
+    {
+
+    }
+
+    // Full constructor where the stats are initalized with the WeaponStats object
+    public WeaponStats(float damage, float pierce, float timeToAttack, float projectileSpeed, float aoe, float extraAttacks, float attackDuration, float critChance, float critDamage) // Constructor object for weapon stats
     {
         this.damage = damage;
+        this.pierce = pierce;
         this.timeToAttack = timeToAttack;
+        this.projectileSpeed = projectileSpeed;
+        this.aoe = aoe;
+        this.extraAttacks = extraAttacks;
+        this.attackDuration = attackDuration;
+        this.critChance = critChance;
+        this.critDamage = critDamage;
     }
 
     internal void SumStats(WeaponStats weaponUpgradeStats)
@@ -37,4 +51,6 @@ public class WeaponStats
         this.timeToAttack += weaponUpgradeStats.timeToAttack;
         this.pierce += weaponUpgradeStats.pierce;
     }
+
+    
 }

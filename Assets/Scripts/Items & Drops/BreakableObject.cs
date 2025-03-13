@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BreakableObject : MonoBehaviour, IDamageable
 {
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         // Call the item drop script
         DropOnDestroy drop = gameObject.GetComponent<DropOnDestroy>();
