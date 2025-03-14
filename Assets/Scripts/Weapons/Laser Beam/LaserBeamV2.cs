@@ -13,7 +13,6 @@ public class LaserBeamV2 : WeaponBase
     public Transform firePointRotator;
     public LineRenderer attackingLaserRenderer;
     public LineRenderer targetingLaserRenderer;
-    Transform m_transform;
 
     // Variables that are critical to the function of the laser
     Boolean isFiring = false; // represents if the laser is currently firing
@@ -29,14 +28,6 @@ public class LaserBeamV2 : WeaponBase
     // public float cooldown = 3f; // REPLACED BY WEAPONSTATS.TIMETOATTACK
     public float duration = 2f;
     public float rotationSpeed = 30f; // Represents degrees per second
-    
-    PlayerController playerController;
-
-    void Awake()
-    {
-        m_transform = GetComponent<Transform>();
-        playerController = GetComponentInParent<PlayerController>();
-    }
 
     // override the default weapon behavior
     public override void Update()
