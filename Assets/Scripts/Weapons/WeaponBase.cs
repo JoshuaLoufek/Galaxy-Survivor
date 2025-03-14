@@ -9,6 +9,10 @@ public abstract class WeaponBase : MonoBehaviour
 {
     // GLOBAL VARIABLES ==========================================================================================
 
+    public PlayerController playerController;
+    public Transform playerTransform;
+    public WeaponBase thisWeapon;
+
     public WeaponData defaultWeaponData; // This caries the DEFAULT weapon stats
 
     public PlayerStats playerStats; // This carries the PLAYER BUFFS
@@ -21,7 +25,14 @@ public abstract class WeaponBase : MonoBehaviour
 
     // INITIALIZATION FUNCTIONS ==================================================================================
 
-    public void Start()
+    public virtual void Awake()
+    {
+        playerController = GetComponentInParent<PlayerController>();
+        playerTransform = GetComponentInParent<Transform>();
+        thisWeapon = GetComponent<WeaponBase>();
+    }
+
+    public virtual void Start()
     {
         attackTimer = 1f; // Ensures that the update function won't fire until the Initialize function runs
     }

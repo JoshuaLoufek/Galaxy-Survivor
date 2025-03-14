@@ -19,16 +19,24 @@ public abstract class ProjectileBase : MonoBehaviour
     public float critChance;
     public float critDamage;
 
+    public float lifespan;
+
     // Start is called before the first frame update
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
+        lifespan = 0f;
+        attackDuration = 999f; // temporary attack duration until the real one is initialized
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         MoveProjectile();
+
+        // Tracks time until the destruction of the object
+        lifespan += Time.deltaTime;
+        if (lifespan >= attackDuration) Destroy(gameObject);
     }
 
     // This will be called form the weapon attack script
@@ -39,6 +47,8 @@ public abstract class ProjectileBase : MonoBehaviour
         
         // Set the direction the projectile will travel in
         direction = new Vector2(fireDirection.x, fireDirection.y);
+
+        weapon = weaponBase;
         
         // Set the stats up. We don't want a fired projectile to change behvaior mid flight, so set up and use projectile specific variables instead
         SetProjectileStats(weaponBase.currentWeaponStats);

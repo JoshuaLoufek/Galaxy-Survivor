@@ -7,23 +7,18 @@ public class LaserGunWeapon : WeaponBase
 {
     [SerializeField] GameObject bulletPrefab;
 
-    PlayerController playerController;
-    Transform playerTransform;
-
-    private void Awake()
-    {
-        playerController = GetComponentInParent<PlayerController>();
-        playerTransform = GetComponentInParent<Transform>();
-    }
-
     public override void Attack()
     {
         // Create bullet object
         GameObject shotBullet = Instantiate(bulletPrefab);
+
         // Set spawn position to be centered on the player
         shotBullet.transform.position = transform.position;
+
+        // Set the direction the projectile will be fired in
+        Vector2 fireDirection = new Vector2(playerController.lastHorizontalVector, playerController.lastVerticalVector);
+
         // Set the travel direction and rotate the bullet to match
-        //shotBullet.GetComponent<LaserBulletProjectile>().InitializeProjectile
-        //    (playerTransform, playerController.lastHorizontalVector, playerController.lastVerticalVector, currentWeaponStats.damage, this);
+        shotBullet.GetComponent<ProjectileBase>().InitializeProjectile(playerTransform, fireDirection, thisWeapon);
     }
 }

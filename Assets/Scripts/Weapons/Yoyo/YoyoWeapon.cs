@@ -7,18 +7,6 @@ public class YoyoWeapon : WeaponBase
 {
     [SerializeField] GameObject yoyoPrefab;
 
-    PlayerController playerController;
-    Transform playerTransform;
-
-    WeaponBase thisWeapon;
-
-    private void Awake()
-    {
-        playerController = GetComponentInParent<PlayerController>();
-        playerTransform = GetComponentInParent<Transform>();
-        thisWeapon = GetComponent<WeaponBase>();
-    }
-
     public override void Attack()
     {
         // Create bullet object
