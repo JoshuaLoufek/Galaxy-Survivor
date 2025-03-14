@@ -15,7 +15,7 @@ public class WeaponData : ScriptableObject
 [Serializable]
 public class WeaponStats
 {
-    public float damage { get; set; }
+    public float damage;
     public float pierce;
     public float timeToAttack;
     public float projectileSpeed;

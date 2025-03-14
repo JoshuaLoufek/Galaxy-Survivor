@@ -16,7 +16,6 @@ public class YoyoProjectile : ProjectileBase
 
     void Awake()
     {
-        
         playerContact = 0;
     }
 
@@ -30,23 +29,21 @@ public class YoyoProjectile : ProjectileBase
         myRB.AddForce(new Vector2(x, y).normalized * returnForce * Time.deltaTime);
     }
 
-    public override void InitializeProjectile(Transform pt, Vector2 fireDirection, WeaponStats currentWeaponStats)
+    public override void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponBase weaponBase)
     {
         myRB = GetComponent<Rigidbody2D>();
 
-        playerTransform = pt;
+        transform.position = origin.position; // center the yoyo on the player to start (redundant with the YoyoWeapon script?)
+        playerTransform = origin; // Set up the player transform so the yoyo knows where to return
+
+        // Get a reference to the weapon that fired this projectile
+        weapon = weaponBase;
+        
+        // Set the local projectile stats up
+        SetProjectileStats(weaponBase.currentWeaponStats);
+
+        // Set the initial velocity away from the player
         myRB.velocity = fireDirection.normalized * initialVelocity;
-        transform.position = pt.position; // center the yoyo on the player to start
-
-        // weapon = weaponBase;
-
-        damage = currentWeaponStats.damage;
-        pierce = currentWeaponStats.pierce;
-        projectileSpeed = currentWeaponStats.projectileSpeed;
-        aoe = currentWeaponStats.aoe;
-        attackDuration = currentWeaponStats.attackDuration;
-        critChance = currentWeaponStats.critChance;
-        critDamage = currentWeaponStats.critDamage;
     }
 
     // This function is called whenever the yoyo comes into contact with a (collider + rigidbody) object.
@@ -58,6 +55,7 @@ public class YoyoProjectile : ProjectileBase
         // Verifies that the found object isn't null
         if (enemy != null)
         {
+            weapon.PostDamage((int)damage, collision.transform.position);
             enemy.TakeDamage(damage); // Damages the enemy
             pierce -= 1; // Reduces the pierce counter
             if (pierce <= 0) Destroy(gameObject); // Checks if pierce hit zero and the yoyo needs destroying

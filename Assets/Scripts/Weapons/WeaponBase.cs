@@ -17,21 +17,26 @@ public abstract class WeaponBase : MonoBehaviour
 
     public WeaponStats currentWeaponStats; // The CURRENT weapon stats 
 
-    float attackTimer;
+    public float attackTimer;
 
     // INITIALIZATION FUNCTIONS ==================================================================================
 
     public void Start()
     {
-        attackTimer = 1f; // makes sure that the update function won't fire until the Initialize function runs
+        attackTimer = 1f; // Ensures that the update function won't fire until the Initialize function runs
     }
 
     // Called from the weapon manager after the weapon is instantiated
     public virtual void InitializeWeaponData(WeaponData wd)
     {
         defaultWeaponData = wd;
-        currentWeaponStats = new WeaponStats(1,1,1,1,1,1,1,1,1);
-        //CalculateAllStats();
+        currentWeaponStats = new WeaponStats();
+
+        playerStats = GetComponentInParent<PlayerStats>();
+        // get weapon upgrades component
+        // get held items component
+
+        CalculateAllStats();
         attackTimer = currentWeaponStats.timeToAttack;
     }
 
@@ -67,7 +72,7 @@ public abstract class WeaponBase : MonoBehaviour
     // STATISTIC CALCULATOR FUNCTIONS ============================================================================
         // This is where the final, usable versions of each stat are calculated.
         // They will be applied in the functions that are above.
-    /*
+    
     public void CalculateAllStats()
     {
         CalculateDamage();
@@ -79,6 +84,7 @@ public abstract class WeaponBase : MonoBehaviour
         CalculateAttackDuration();
         CalculateCritChance();
         CalculateCritDamage();
+        Debug.Log("Finished all weapon calculations successfully!");
     }
 
     public virtual void CalculateDamage()
@@ -88,8 +94,9 @@ public abstract class WeaponBase : MonoBehaviour
             // + weaponBuffs
             // + itemBuffs
             );
+        print("Current Damage Calculated: " + currentWeaponStats.damage);
     }
-
+    
     public virtual void CalculatePierce()
     {
         currentWeaponStats.pierce = defaultWeaponData.stats.pierce * (1
@@ -163,5 +170,5 @@ public abstract class WeaponBase : MonoBehaviour
             // + itemBuffs
             );
     }
-    */
+    
 }

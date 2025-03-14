@@ -13,14 +13,11 @@ public abstract class ProjectileBase : MonoBehaviour
 
     public float damage;
     public float pierce;
-    // public float attackSpeed; // this stat doesn't matter to a projectile
     public float projectileSpeed;
     public float aoe;
-    // public float extraAttacks; // this stat doesn't matter to a projectile
     public float attackDuration;
     public float critChance;
     public float critDamage;
-
 
     // Start is called before the first frame update
     void Start()
@@ -35,18 +32,20 @@ public abstract class ProjectileBase : MonoBehaviour
     }
 
     // This will be called form the weapon attack script
-    public virtual void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponStats currentWeaponStats)
+    public virtual void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponBase weaponBase)
     {
         // Center the bullet on the player to start
         transform.position = origin.position;
         
         // Set the direction the projectile will travel in
-        direction = new Vector3(fireDirection.x, fireDirection.y);
-        
-        // Gets a reference to the weapon that fired the projectile
-        // weapon = weaponBase;
+        direction = new Vector2(fireDirection.x, fireDirection.y);
         
         // Set the stats up. We don't want a fired projectile to change behvaior mid flight, so set up and use projectile specific variables instead
+        SetProjectileStats(weaponBase.currentWeaponStats);
+    }
+
+    public void SetProjectileStats(WeaponStats currentWeaponStats)
+    {
         damage = currentWeaponStats.damage;
         pierce = currentWeaponStats.pierce;
         projectileSpeed = currentWeaponStats.projectileSpeed;
