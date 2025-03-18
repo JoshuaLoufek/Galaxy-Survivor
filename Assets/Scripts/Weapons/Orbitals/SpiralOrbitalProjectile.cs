@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class SpiralOrbitalProjectile : MonoBehaviour
+public class SpiralOrbitalProjectile : ProjectileBase
 {
     float radius; 
     float moveSpeed;
     float currentAngle;
     float startTime;
-    public int damage = 5;
-    public int pierce = 999;
 
     public float initialMoveSpeed;
     public float expansionSpeed;
@@ -18,7 +16,7 @@ public class SpiralOrbitalProjectile : MonoBehaviour
 
     Transform playerTransform;
 
-    void Start()
+    private void Awake()
     {
         radius = 1f;
         currentAngle = 0f;
@@ -26,13 +24,17 @@ public class SpiralOrbitalProjectile : MonoBehaviour
         startTime = Time.time;
     }
 
-    void Update()
+    public override void InitializeProjectile(Transform origin, Vector2 worthless, WeaponBase weaponBase)
     {
-        Version1();
-        //Version2();
+        playerTransform = origin;
+        transform.position = new Vector2(origin.position.x, origin.position.y);
+        
+        weapon = weaponBase;
+
+        SetProjectileStats(weaponBase.currentWeaponStats);
     }
 
-    void Version1() // constant revolution speed
+    public override void MoveProjectile() // constant revolution speed
     {
         // Determine the position to move to
         float xPos = playerTransform.position.x + (radius * Mathf.Sin((Time.time - startTime) * revolutionSpeed));
@@ -43,43 +45,5 @@ public class SpiralOrbitalProjectile : MonoBehaviour
 
         // Update the radius for the next update
         radius += expansionSpeed * Time.deltaTime;
-    }
-
-    void Version2() // constant move speed (or can be manually tweaked)
-    {
-        // The radius increases at a constant rate
-        radius += expansionSpeed * Time.deltaTime;
-        moveSpeed += expansionSpeed * Time.deltaTime;
-
-        // Solve for the change in angle if the projectile moves a certain distance
-        float theta = (moveSpeed * Time.deltaTime) / radius; // As the radius increases, the angle moved decreases
-        currentAngle += theta;
-
-        // update the position of the projectile
-        float xPos = playerTransform.position.x + Mathf.Sin(currentAngle) * radius;
-        float yPos = playerTransform.position.y + Mathf.Cos(currentAngle) * radius;
-        transform.position = new Vector2(xPos, yPos);
-    }
-
-    public void InitializeProjectile(Transform pt, float x, float y, int dmg)
-    {
-        playerTransform = pt;
-        transform.position = new Vector2(pt.position.x, pt.position.y);
-        damage = dmg;
-    }
-
-    // This function is called whenever the yoyo comes into contact with a (collider + rigidbody) object.
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // Grabs the damagable interface of the object hit
-        IDamageable enemy = collision.GetComponent<IDamageable>();
-
-        // Verifies that the found object isn't null
-        if (enemy != null)
-        {
-            enemy.TakeDamage(damage); // Damages the enemy
-            pierce -= 1; // Reduces the pierce counter
-            if (pierce <= 0) Destroy(gameObject); // Checks if pierce hit zero and the yoyo needs destroying
-        }
     }
 }

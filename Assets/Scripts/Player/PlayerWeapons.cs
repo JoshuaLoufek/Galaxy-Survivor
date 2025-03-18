@@ -45,7 +45,7 @@ public class PlayerWeapons : MonoBehaviour
     internal void UpgradeWeapon(UpgradeData upgradeData)
     {
         WeaponBase weaponToUpgrade = aquiredWeapons.Find(wd => wd.defaultWeaponData == upgradeData.weaponData);
-        weaponToUpgrade.Upgrade(upgradeData);
+        weaponToUpgrade.UpgradeWeapon(upgradeData);
     }
 
     // STATISTIC CALCULATOR FUNCTIONS =====================================================================================

@@ -13,7 +13,6 @@ public class LaserBeamV2 : WeaponBase
     public Transform firePointRotator;
     public LineRenderer attackingLaserRenderer;
     public LineRenderer targetingLaserRenderer;
-    Transform m_transform;
 
     // Variables that are critical to the function of the laser
     Boolean isFiring = false; // represents if the laser is currently firing
@@ -29,14 +28,6 @@ public class LaserBeamV2 : WeaponBase
     // public float cooldown = 3f; // REPLACED BY WEAPONSTATS.TIMETOATTACK
     public float duration = 2f;
     public float rotationSpeed = 30f; // Represents degrees per second
-    
-    PlayerController playerController;
-
-    void Awake()
-    {
-        m_transform = GetComponent<Transform>();
-        playerController = GetComponentInParent<PlayerController>();
-    }
 
     // override the default weapon behavior
     public override void Update()
@@ -64,7 +55,7 @@ public class LaserBeamV2 : WeaponBase
         } else
         {
             // There is a cooldown period between shots
-            if (cooldownTimer > weaponStats.timeToAttack) // if the time is up, the laser starts firing again and the timer resets
+            if (cooldownTimer > currentWeaponStats.timeToAttack) // if the time is up, the laser starts firing again and the timer resets
             {
                 ShootTargetingLaser();
                 isFiring = true;
@@ -110,8 +101,10 @@ public class LaserBeamV2 : WeaponBase
             // Verifies that the found object was an enemy
             if (enemy != null)
             {
-                enemy.TakeDamage(weaponStats.damage); // Damages the enemy
+                enemy.TakeDamage(currentWeaponStats.damage); // Damages the enemy
             }
+            // new line
+            // new line 2
         }
     }
 

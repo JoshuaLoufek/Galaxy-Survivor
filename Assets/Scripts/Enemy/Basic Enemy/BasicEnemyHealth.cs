@@ -6,7 +6,7 @@ public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
 {
     // GLOBAL VARIABLES =============================================================================
 
-    [SerializeField] int health = 1;
+    [SerializeField] float health = 1f;
     float spawnImmunity = 1f;
     float spawnImmunityTimer;
 
@@ -30,7 +30,7 @@ public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
     }
 
     // HELPER FUNCTIONS =============================================================================
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         // Don't take damage if the enemy still has spawn immunity
         if (spawnImmunityTimer <= spawnImmunity) return;
