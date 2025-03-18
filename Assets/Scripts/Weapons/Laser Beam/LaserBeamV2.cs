@@ -103,6 +103,7 @@ public class LaserBeamV2 : WeaponBase
             {
                 enemy.TakeDamage(currentWeaponStats.damage); // Damages the enemy
             }
+            // new line
         }
     }
 
