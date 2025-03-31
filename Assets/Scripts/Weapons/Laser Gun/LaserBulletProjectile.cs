@@ -21,6 +21,8 @@ public class LaserBulletProjectile : ProjectileBase
         transform.localRotation = Quaternion.Euler(0, 0, z);
 
         SetProjectileStats(weaponBase.currentWeaponStats);
+
+        IncreaseProjectileSize();
     }
 
     // HELPER FUNCTIONs =============================================================================

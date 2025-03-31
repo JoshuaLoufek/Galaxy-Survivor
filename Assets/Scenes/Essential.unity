@@ -1484,7 +1484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 854146402}
   m_Layer: 0
-  m_Name: PlayerArt
+  m_Name: PlayerArtHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2339,7 +2339,7 @@ GameObject:
   - component: {fileID: 1266504330}
   - component: {fileID: 1266504331}
   m_Layer: 0
-  m_Name: retro_ship
+  m_Name: PlayerArt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

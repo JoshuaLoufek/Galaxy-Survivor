@@ -16,10 +16,10 @@ public abstract class WeaponBase : MonoBehaviour
     public WeaponData defaultWeaponData; // This caries the DEFAULT weapon stats
 
     public PlayerStats playerStats; // This carries the PLAYER BUFFS
-    // I need an object here to cover the current weapon upgrades
+    private WeaponStats weaponUpgrades; // I need an object here to cover the current weapon upgrades
     // I need an object here to cover player's held items
 
-    public WeaponStats currentWeaponStats; // The CURRENT weapon stats 
+    public WeaponStats currentWeaponStats; // The CURRENT weapon stats
 
     public float attackTimer;
 
@@ -34,18 +34,19 @@ public abstract class WeaponBase : MonoBehaviour
 
     public virtual void Start()
     {
-        attackTimer = 1f; // Ensures that the update function won't fire until the Initialize function runs
+        attackTimer = 1f; // Ensures that the update function won't fire the weapon until the Initialize function runs
     }
 
     // Called from the weapon manager after the weapon is instantiated
     public virtual void InitializeWeaponData(WeaponData wd)
     {
-        defaultWeaponData = wd;
-        currentWeaponStats = new WeaponStats();
+        defaultWeaponData = wd; // Get the default stats for the weapon
 
-        playerStats = GetComponentInParent<PlayerStats>();
-        // get weapon upgrades component
+        playerStats = GetComponentInParent<PlayerStats>(); // get a reference the player stats component
+        weaponUpgrades = new WeaponStats(); // Create a new WeaponStats object to hold the upgrade buffs
         // get held items component
+
+        currentWeaponStats = new WeaponStats(); // Create an new WeaponStats object to hold the curret stats of the weapon
 
         CalculateAllStats();
         attackTimer = currentWeaponStats.timeToAttack;
@@ -70,14 +71,18 @@ public abstract class WeaponBase : MonoBehaviour
     // Each weapon will implement it's own unique attack method
     public abstract void Attack();
 
-    public virtual void PostDamage(int damage, Vector3 targetPosition)
+    // HELPER FUNCTIONS ==========================================================================================
+
+    public void PostDamage(int damage, Vector3 targetPosition)
     {
         MessageSystem.instance.PostMessage(damage.ToString(), targetPosition);
     }
 
+    // Called when a weapon upgrade is collected. Adds the percentage buffs to the weaponUpgrades object, then calls the stat calculator.
     public void UpgradeWeapon(UpgradeData upgradeData)
     {
-        currentWeaponStats.SumStats(upgradeData.weaponUpgradeStats);
+        weaponUpgrades.AddBuffs(upgradeData.weaponUpgradeStats);
+        CalculateAllStats();
     }
 
     // STATISTIC CALCULATOR FUNCTIONS ============================================================================
@@ -102,7 +107,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         currentWeaponStats.damage = defaultWeaponData.stats.damage * (1
             + playerStats.damage
-            // + weaponBuffs
+            + weaponUpgrades.damage
             // + itemBuffs
             );
         print("Current Damage Calculated: " + currentWeaponStats.damage);
@@ -112,27 +117,26 @@ public abstract class WeaponBase : MonoBehaviour
     {
         currentWeaponStats.pierce = defaultWeaponData.stats.pierce * (1
             + playerStats.pierce
-            // + weaponBuffs
+            + weaponUpgrades.pierce
             // + itemBuffs
             );
     }
 
     public virtual void CalculateTimeToAttack() // NEEDS A UNIQUE FORMULA!!!!! 
     {   // All the other versions of this stat are "attack speed" not "time to attack" so it needs to be divided instead
-        currentWeaponStats.timeToAttack = defaultWeaponData.stats.timeToAttack;
+        currentWeaponStats.timeToAttack = defaultWeaponData.stats.timeToAttack / (1
+            + playerStats.attackSpeed
+            + weaponUpgrades.timeToAttack // this one says time to attack. When done as an upgrade it represents attack speed instead. (see line 20 of WeaponData)
+            );
+
         Debug.Log("Time To Attack Set: " + currentWeaponStats.timeToAttack);
-        // currentWeaponStats.timeToAttack = defaultWeaponData.stats.timeToAttack / (1
-        // + playerStats.attackSpeed
-        // + weaponBuffs
-        // + itemBuffs
-        //    );
     }
 
     public virtual void CalculateProjectileSpeed()
     {
         currentWeaponStats.projectileSpeed = defaultWeaponData.stats.projectileSpeed * (1
             + playerStats.projectileSpeed
-            // + weaponBuffs
+            + weaponUpgrades.projectileSpeed
             // + itemBuffs
             );
     }
@@ -141,16 +145,17 @@ public abstract class WeaponBase : MonoBehaviour
     {
         currentWeaponStats.aoe = defaultWeaponData.stats.aoe * (1
             + playerStats.aoe
-            // + weaponBuffs
+            + weaponUpgrades.aoe
             // + itemBuffs
             );
+        Debug.Log("AOE set: " + currentWeaponStats.aoe);
     }
 
     public virtual void CalculateExtraAttacks()
     {
         currentWeaponStats.extraAttacks = defaultWeaponData.stats.extraAttacks * (1
             + playerStats.extraAttacks
-            // + weaponBuffs
+            + weaponUpgrades.extraAttacks
             // + itemBuffs
             );
     }
@@ -159,7 +164,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         currentWeaponStats.attackDuration = defaultWeaponData.stats.attackDuration * (1
             + playerStats.attackDuration
-            // + weaponBuffs
+            + weaponUpgrades.attackDuration
             // + itemBuffs
             );
     }
@@ -168,7 +173,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         currentWeaponStats.critChance = defaultWeaponData.stats.critChance * (1
             + playerStats.critChance
-            // + weaponBuffs
+            + weaponUpgrades.critChance
             // + itemBuffs
             );
     }
@@ -177,7 +182,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         currentWeaponStats.critDamage = defaultWeaponData.stats.critDamage * (1
             + playerStats.critDamage
-            // + weaponBuffs
+            + weaponUpgrades.critDamage
             // + itemBuffs
             );
     }

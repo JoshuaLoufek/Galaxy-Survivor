@@ -17,7 +17,7 @@ public class WeaponStats
 {
     public float damage;
     public float pierce;
-    public float timeToAttack;
+    public float timeToAttack; // When initializing a weapon this is used as TTA. When representing a weapon upgrade it's a % attack speed buff.
     public float projectileSpeed;
     public float aoe;
     public float extraAttacks;
@@ -45,12 +45,16 @@ public class WeaponStats
         this.critDamage = critDamage;
     }
 
-    internal void SumStats(WeaponStats weaponUpgradeStats)
+    internal void AddBuffs(WeaponStats weaponUpgradeStats)
     {
         this.damage += weaponUpgradeStats.damage;
-        this.timeToAttack += weaponUpgradeStats.timeToAttack;
         this.pierce += weaponUpgradeStats.pierce;
+        this.timeToAttack += weaponUpgradeStats.timeToAttack;
+        this.projectileSpeed += weaponUpgradeStats.projectileSpeed;
+        this.aoe += weaponUpgradeStats.aoe;
+        this.extraAttacks += weaponUpgradeStats.extraAttacks;
+        this.attackDuration += weaponUpgradeStats.attackDuration;
+        this.critChance += weaponUpgradeStats.critChance;
+        this.critDamage += weaponUpgradeStats.critDamage;
     }
-
-    
 }

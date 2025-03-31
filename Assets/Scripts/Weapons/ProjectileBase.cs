@@ -15,6 +15,7 @@ public abstract class ProjectileBase : MonoBehaviour
     public float pierce;
     public float projectileSpeed;
     public float aoe;
+    public float extraAttacks;
     public float attackDuration;
     public float critChance;
     public float critDamage;
@@ -48,21 +49,32 @@ public abstract class ProjectileBase : MonoBehaviour
         // Set the direction the projectile will travel in
         direction = new Vector2(fireDirection.x, fireDirection.y);
 
+        // Get a reference to the weapon for the purpose of showing damage numbers
         weapon = weaponBase;
         
         // Set the stats up. We don't want a fired projectile to change behvaior mid flight, so set up and use projectile specific variables instead
         SetProjectileStats(weaponBase.currentWeaponStats);
+
+        // aoe
+        IncreaseProjectileSize();
     }
 
     public void SetProjectileStats(WeaponStats currentWeaponStats)
     {
-        damage = currentWeaponStats.damage;
-        pierce = currentWeaponStats.pierce;
-        projectileSpeed = currentWeaponStats.projectileSpeed;
-        aoe = currentWeaponStats.aoe;
-        attackDuration = currentWeaponStats.attackDuration;
-        critChance = currentWeaponStats.critChance;
-        critDamage = currentWeaponStats.critDamage;
+        damage = currentWeaponStats.damage; // implemented (DamageEnemy)
+        pierce = currentWeaponStats.pierce; // implemented (DamageEnemy)
+        projectileSpeed = currentWeaponStats.projectileSpeed; // implemented (MoveProjectile)
+        aoe = currentWeaponStats.aoe; // not
+        extraAttacks = currentWeaponStats.extraAttacks; // not
+        attackDuration = currentWeaponStats.attackDuration; // implemented (Update)
+        critChance = currentWeaponStats.critChance; // not
+        critDamage = currentWeaponStats.critDamage; // not
+    }
+
+    public void IncreaseProjectileSize()
+    {
+        Vector3 currentSize = transform.localScale;
+        transform.localScale = new Vector3(currentSize.x * aoe, currentSize.y * aoe, currentSize.z);
     }
 
     public abstract void MoveProjectile();

@@ -19,6 +19,6 @@ public class UpgradeData : ScriptableObject
     public string Name;
     public Sprite icon;
 
-    public WeaponData weaponData;
-    public WeaponStats weaponUpgradeStats;
+    public WeaponData weaponData; // Holds a reference to the weapon that this upgrade belongs to.
+    public WeaponStats weaponUpgradeStats; // Holds the actual upgrade stats
 }

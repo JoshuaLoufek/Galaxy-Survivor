@@ -18,12 +18,12 @@ public class PlayerStats : MonoBehaviour
     public CoreStats coreStats;
 
     // POWER
-    public float damage;
-    public float pierce;
+    public float damage; // done
+    public float pierce; // done
     // SPEED
     public float moveSpeed; // done
-    public float attackSpeed;
-    public float projectileSpeed;
+    public float attackSpeed; // done
+    public float projectileSpeed; // partial (calculator implemented, stat not utilized)
     // DURABILITY
     public float maxHealth; // done
     public float healthRegen; // done
@@ -32,13 +32,13 @@ public class PlayerStats : MonoBehaviour
     public float bonusEXP;
     public float pickupRange; // done
     // AMPLIFY
-    public float aoe;
-    public float extraAttacks;
+    public float aoe; // done (For laser gun at least)
+    public float extraAttacks; // partial (calculator implemented, stat not utilized)
     // CAPACITY
-    public float attackDuration;
+    public float attackDuration; // done
     // LUCK
-    public float critChance;
-    public float critDamage;
+    public float critChance; // partial (calculator implemented, stat not utilized)
+    public float critDamage; // partial (calculator implemented, stat not utilized)
 
     // INITIALIZATION FUNCTIONS ==================================================================================
 
@@ -121,6 +121,8 @@ public class PlayerStats : MonoBehaviour
     {
         SetDamage(coreStats.power);
         SetPierce(coreStats.power);
+
+        playerWeapons.UpdateWeaponStats(); // Need to calculate the weapon updates here
     }
 
     private void SetDamage(int power)
@@ -141,6 +143,8 @@ public class PlayerStats : MonoBehaviour
         SetMoveSpeed(coreStats.speed);
         SetAttackSpeed(coreStats.speed);
         SetProjectileSpeed(coreStats.speed);
+
+        playerWeapons.UpdateWeaponStats(); // Need to calculate the weapon updates here
     }
 
     private void SetMoveSpeed(float speed) // FUNCTIONAL
@@ -204,7 +208,7 @@ public class PlayerStats : MonoBehaviour
         bonusEXP = 0.05f * intelligence;
     }
 
-    private void SetPickupRange(int intelligence)
+    private void SetPickupRange(int intelligence) // FUNCTIONAL
     {
         // 20% bonus pickup range per level
         pickupRange = 0.2f * intelligence;
@@ -216,6 +220,8 @@ public class PlayerStats : MonoBehaviour
     {
         SetAOE(coreStats.amplify);
         SetExtraAttacks(coreStats.amplify);
+
+        playerWeapons.UpdateWeaponStats(); // Need to calculate the weapon updates here
     }
     private void SetAOE(int amplify)
     {
@@ -233,6 +239,8 @@ public class PlayerStats : MonoBehaviour
     private void UpdateCapacityStats()
     {
         SetAttackDuration(coreStats.capacity);
+
+        playerWeapons.UpdateWeaponStats(); // Need to calculate the weapon updates here
     }
 
     private void SetAttackDuration(int capacity)
@@ -246,6 +254,8 @@ public class PlayerStats : MonoBehaviour
     {
         SetCritChance(coreStats.luck);
         SetCritDamage(coreStats.luck);
+
+        playerWeapons.UpdateWeaponStats(); // Need to calculate the weapon updates here
     }
 
     private void SetCritChance(int luck)

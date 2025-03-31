@@ -7,7 +7,6 @@ public class SpiralOrbitalProjectile : ProjectileBase
 {
     float radius; 
     float moveSpeed;
-    float currentAngle;
     float startTime;
 
     public float initialMoveSpeed;
@@ -19,7 +18,6 @@ public class SpiralOrbitalProjectile : ProjectileBase
     private void Awake()
     {
         radius = 1f;
-        currentAngle = 0f;
         moveSpeed = initialMoveSpeed;
         startTime = Time.time;
     }

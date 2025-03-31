@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
     // PLAYER INPUT PROCESSING ===================================================================================
 
     // Captures the player's intended movement direction and if they're currently trying to move.
-    public void OnMove(InputValue moveValue) 
+    public void OnMove(InputValue moveValue)
     {
         moveDirection = moveValue.Get<Vector2>().normalized;
 

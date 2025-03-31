@@ -15,11 +15,11 @@ MonoBehaviour:
   Name: Laser Gun
   weaponPrefab: {fileID: 457040848083171356, guid: 2ef4bbc7790a7ec48940407a8f692b97, type: 3}
   stats:
-    damage: 1
+    damage: 50
     pierce: 1
     timeToAttack: 0.4
     projectileSpeed: 10
-    aoe: 0
+    aoe: 1
     extraAttacks: 0
     attackDuration: 5
     critChance: 0
@@ -28,3 +28,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 39bcbdb5d2141454284b206b470302e9, type: 2}
   - {fileID: 11400000, guid: 7d7134ced7b09524b9b902592c9159d0, type: 2}
   - {fileID: 11400000, guid: f19002bd59920484a94149102a7c68f0, type: 2}
+  - {fileID: 11400000, guid: ba3f97dff84a3c24e909b402fab816d8, type: 2}

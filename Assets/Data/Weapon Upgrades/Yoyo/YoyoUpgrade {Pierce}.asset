@@ -13,10 +13,16 @@ MonoBehaviour:
   m_Name: YoyoUpgrade {Pierce}
   m_EditorClassIdentifier: 
   upgradeType: 1
-  Name: 
+  Name: Yoyo Pierce
   icon: {fileID: 0}
   weaponData: {fileID: 11400000, guid: 32d59f15126811a47ac5d9f4979d01f1, type: 2}
   weaponUpgradeStats:
     damage: 0
-    timeToAttack: 0
     pierce: 1
+    timeToAttack: 0
+    projectileSpeed: 0
+    aoe: 0
+    extraAttacks: 0
+    attackDuration: 0
+    critChance: 0
+    critDamage: 0

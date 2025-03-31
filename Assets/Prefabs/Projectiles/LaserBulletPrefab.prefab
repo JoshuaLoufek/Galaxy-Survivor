@@ -99,9 +99,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3238f9a11e6064493564e1a3d1330e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  myRB: {fileID: 0}
+  weapon: {fileID: 0}
+  direction: {x: 0, y: 0, z: 0}
   damage: 1
   pierce: 2
+  projectileSpeed: 0
+  aoe: 0
+  attackDuration: 0
+  critChance: 0
+  critDamage: 0
   lifespan: 5
 --- !u!70 &-5881769222760125170
 CapsuleCollider2D:
