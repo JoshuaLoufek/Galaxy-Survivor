@@ -32,6 +32,12 @@ public class SpiralOrbitalProjectile : ProjectileBase
         SetProjectileStats(weaponBase.currentWeaponStats);
     }
 
+    public override void UniqueInitialization(Transform origin, Vector2 fireDirection)
+    {
+        playerTransform = origin;
+        transform.position = new Vector2(origin.position.x, origin.position.y);
+    }
+
     public override void MoveProjectile() // constant revolution speed
     {
         // Determine the position to move to

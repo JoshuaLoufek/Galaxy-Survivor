@@ -16,7 +16,17 @@ public class YoyoProjectile : ProjectileBase
 
     void Awake()
     {
+        myRB = GetComponent<Rigidbody2D>();
         playerContact = 0;
+    }
+
+    public override void UniqueInitialization(Transform origin, Vector2 fireDirection)
+    {
+        transform.position = origin.position; // center the yoyo on the player to start (redundant with the YoyoWeapon script?)
+        playerTransform = origin; // Set up the player transform so the yoyo knows where to return
+
+        // Set the initial velocity away from the player
+        myRB.velocity = fireDirection.normalized * initialVelocity;
     }
 
     public override void MoveProjectile()
@@ -31,8 +41,6 @@ public class YoyoProjectile : ProjectileBase
 
     public override void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponBase weaponBase)
     {
-        myRB = GetComponent<Rigidbody2D>();
-
         transform.position = origin.position; // center the yoyo on the player to start (redundant with the YoyoWeapon script?)
         playerTransform = origin; // Set up the player transform so the yoyo knows where to return
 
@@ -45,6 +53,8 @@ public class YoyoProjectile : ProjectileBase
         // Set the initial velocity away from the player
         myRB.velocity = fireDirection.normalized * initialVelocity;
     }
+
+
 
     // This function is called whenever the yoyo comes into contact with a (collider + rigidbody) object.
     public override void DamageEnemy(Collider2D collision)

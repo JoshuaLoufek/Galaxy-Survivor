@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using UnityEngine;
 
 public class LaserBulletProjectile : ProjectileBase
@@ -17,12 +18,19 @@ public class LaserBulletProjectile : ProjectileBase
         weapon = weaponBase;
 
         // Rotates the bullet so it's aligned properly
-        float z = -90 + (Mathf.Atan2(fireDirection.y, fireDirection.x) * (180 / Mathf.PI));
-        transform.localRotation = Quaternion.Euler(0, 0, z);
+        // float z = -90 + (Mathf.Atan2(fireDirection.y, fireDirection.x) * (180 / Mathf.PI));
+        // transform.localRotation = Quaternion.Euler(0, 0, z);
 
         SetProjectileStats(weaponBase.currentWeaponStats);
 
         IncreaseProjectileSize();
+    }
+
+    public override void UniqueInitialization(Transform origin, Vector2 fireDirection)
+    {
+        // Rotates the bullet so it's aligned properly
+        float z = -90 + (Mathf.Atan2(fireDirection.y, fireDirection.x) * (180 / Mathf.PI));
+        transform.localRotation = Quaternion.Euler(0, 0, z);
     }
 
     // HELPER FUNCTIONs =============================================================================

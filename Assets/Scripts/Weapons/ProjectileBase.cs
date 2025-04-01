@@ -40,13 +40,13 @@ public abstract class ProjectileBase : MonoBehaviour
         if (lifespan >= attackDuration) Destroy(gameObject);
     }
 
-    // This will be called form the weapon attack script
+    // This will be called from the weapon attack script
     public virtual void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponBase weaponBase)
     {
         // Center the bullet on the player to start
         transform.position = origin.position;
         
-        // Set the direction the projectile will travel in
+        // Set the direction the projectile was fired in (might not always be relevant)
         direction = new Vector2(fireDirection.x, fireDirection.y);
 
         // Get a reference to the weapon for the purpose of showing damage numbers
@@ -55,9 +55,14 @@ public abstract class ProjectileBase : MonoBehaviour
         // Set the stats up. We don't want a fired projectile to change behvaior mid flight, so set up and use projectile specific variables instead
         SetProjectileStats(weaponBase.currentWeaponStats);
 
-        // aoe
+        // Increase projectile size in accordance with the AOE stat
         IncreaseProjectileSize();
+
+        // Run any initialization unique to the projectile
+        UniqueInitialization(origin, fireDirection);
     }
+
+    public abstract void UniqueInitialization(Transform origin, Vector2 fireDirection);
 
     public void SetProjectileStats(WeaponStats currentWeaponStats)
     {
@@ -70,11 +75,12 @@ public abstract class ProjectileBase : MonoBehaviour
         critChance = currentWeaponStats.critChance; // not
         critDamage = currentWeaponStats.critDamage; // not
     }
-
+    
     public void IncreaseProjectileSize()
     {
         Vector3 currentSize = transform.localScale;
-        transform.localScale = new Vector3(currentSize.x * aoe, currentSize.y * aoe, currentSize.z);
+        transform.localScale = new Vector3(currentSize.x * Mathf.Sqrt(aoe), currentSize.y * Mathf.Sqrt(aoe), currentSize.z);
+
     }
 
     public abstract void MoveProjectile();
