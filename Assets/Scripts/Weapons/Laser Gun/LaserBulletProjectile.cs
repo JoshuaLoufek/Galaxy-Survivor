@@ -7,7 +7,7 @@ using UnityEngine;
 public class LaserBulletProjectile : ProjectileBase
 {
     // INITIALIZATION FUNCTIONS =====================================================================
-
+    /*
     public override void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponBase weaponBase)
     {
         transform.position = origin.position;
@@ -25,7 +25,7 @@ public class LaserBulletProjectile : ProjectileBase
 
         IncreaseProjectileSize();
     }
-
+    */
     public override void UniqueInitialization(Transform origin, Vector2 fireDirection)
     {
         // Rotates the bullet so it's aligned properly
