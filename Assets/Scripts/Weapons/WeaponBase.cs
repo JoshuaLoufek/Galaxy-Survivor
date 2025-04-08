@@ -13,12 +13,10 @@ public abstract class WeaponBase : MonoBehaviour
     public Transform playerTransform;
     public WeaponBase thisWeapon;
 
-    public WeaponData defaultWeaponData; // This caries the DEFAULT weapon stats
-
+    public WeaponData defaultWeaponData; // This caries the DEFAULT weapon stats. Also carries important reference information.
     public PlayerStats playerStats; // This carries the PLAYER BUFFS
-    private WeaponStats weaponUpgrades; // I need an object here to cover the current weapon upgrades
-    // I need an object here to cover player's held items
-
+    private WeaponStats weaponUpgrades; // This carries the WEAPON BUFFS
+    // I need an object here to cover the player's held items
     public WeaponStats currentWeaponStats; // The CURRENT weapon stats
 
     public float attackTimer;
@@ -40,14 +38,13 @@ public abstract class WeaponBase : MonoBehaviour
     // Called from the weapon manager after the weapon is instantiated
     public virtual void InitializeWeaponData(WeaponData wd)
     {
-        defaultWeaponData = wd; // Get the default stats for the weapon
+        defaultWeaponData = wd; // Get the default stats and data references for this weapon
 
         playerStats = GetComponentInParent<PlayerStats>(); // get a reference the player stats component
         weaponUpgrades = new WeaponStats(); // Create a new WeaponStats object to hold the upgrade buffs
         // get held items component
 
         currentWeaponStats = new WeaponStats(); // Create an new WeaponStats object to hold the curret stats of the weapon
-
         CalculateAllStats();
         attackTimer = currentWeaponStats.timeToAttack;
     }

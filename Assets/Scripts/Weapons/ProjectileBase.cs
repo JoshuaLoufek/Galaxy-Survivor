@@ -27,7 +27,6 @@ public abstract class ProjectileBase : MonoBehaviour
     {
         myRB = GetComponent<Rigidbody2D>();
         lifespan = 0f;
-        attackDuration = 999f; // temporary attack duration until the real one is initialized
     }
 
     // Update is called once per frame

@@ -20,30 +20,37 @@ public class PlayerStats : MonoBehaviour
     // POWER
     public float damage; // done
     public float pierce; // done
-    // knockback
+    // ------------------ knockback
+
     // SPEED
     public float moveSpeed; // done
     public float attackSpeed; // done
     public float projectileSpeed; // partial (calculator implemented, stat not utilized)
+
     // DURABILITY
     public float maxHealth; // done
     public float healthRegen; // done
     public float defense; // done
+
     // INTELLIGENCE
     public float bonusEXP;
     public float pickupRange; // done
-    // extra skill points
+    // ------------------ extra skill points
+
     // AMPLIFY
     public float aoe; // done (For laser gun at least)
-    public float extraAttacks; // partial (calculator implemented, stat not utilized)
+    public float extraAttacks; // partial (calculator implemented, stat only utilized by the laser gun)
+    // ------------------ ???
+
     // CAPACITY
     public float attackDuration; // done
-    // fuel capacity
-    // ???
+    // ------------------ fuel capacity
+    // ------------------ ???
+
     // LUCK
     public float critChance; // partial (calculator implemented, stat not utilized)
     public float critDamage; // partial (calculator implemented, stat not utilized)
-    // extra choice
+    // ------------------ extra choice
 
     // INITIALIZATION FUNCTIONS ==================================================================================
 

@@ -20,7 +20,7 @@ MonoBehaviour:
     timeToAttack: 0.4
     projectileSpeed: 10
     aoe: 1
-    extraAttacks: 5
+    extraAttacks: 3
     attackDuration: 5
     critChance: 0
     critDamage: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2a6e5e110c460042b484cbca7f8d69e, type: 3}
   m_Name: Spiral
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Spiral
   weaponPrefab: {fileID: 2539150928458693274, guid: ad4459494e851554498f94e654a39009, type: 3}
   stats:
     damage: 2
