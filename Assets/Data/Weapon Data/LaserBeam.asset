@@ -16,4 +16,12 @@ MonoBehaviour:
   weaponPrefab: {fileID: 1660883788491459259, guid: 2d4b4263257fb114a947c9a5e09feaec, type: 3}
   stats:
     damage: 1
+    pierce: 0
     timeToAttack: 3
+    projectileSpeed: 0
+    aoe: 1
+    extraAttacks: 1
+    attackDuration: 0
+    critChance: 0
+    critDamage: 0
+  upgrades: []

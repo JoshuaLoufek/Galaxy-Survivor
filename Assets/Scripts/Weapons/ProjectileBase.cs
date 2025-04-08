@@ -43,9 +43,6 @@ public abstract class ProjectileBase : MonoBehaviour
     // This will be called from the weapon attack script
     public virtual void InitializeProjectile(Transform origin, Vector2 fireDirection, WeaponBase weaponBase)
     {
-        // Center the bullet on the player to start
-        transform.position = origin.position;
-        
         // Set the direction the projectile was fired in (might not always be relevant)
         direction = new Vector2(fireDirection.x, fireDirection.y);
 

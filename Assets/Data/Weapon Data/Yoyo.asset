@@ -19,8 +19,8 @@ MonoBehaviour:
     pierce: 999
     timeToAttack: 1.5
     projectileSpeed: 0
-    aoe: 0
-    extraAttacks: 0
+    aoe: 1
+    extraAttacks: 1
     attackDuration: 0
     critChance: 0
     critDamage: 0

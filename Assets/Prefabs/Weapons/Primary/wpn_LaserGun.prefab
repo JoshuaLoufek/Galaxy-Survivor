@@ -44,8 +44,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1308094ea4c06354e8ce97e217cdb3dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  playerTransform: {fileID: 0}
+  thisWeapon: {fileID: 0}
   defaultWeaponData: {fileID: 11400000, guid: dbfe4ae9869cb3d4f86b0b2406883482, type: 2}
-  weaponStats:
+  playerStats: {fileID: 0}
+  currentWeaponStats:
     damage: 0
+    pierce: 0
     timeToAttack: 0
+    projectileSpeed: 0
+    aoe: 0
+    extraAttacks: 0
+    attackDuration: 0
+    critChance: 0
+    critDamage: 0
+  attackTimer: 0
   bulletPrefab: {fileID: 1979960911027034416, guid: 3cbb97f9e00bb674386158eb375d0424, type: 3}
+  spread: 0.5
