@@ -22,6 +22,7 @@ public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
     private void Update()
     {
         spawnImmunityTimer += Time.deltaTime;
+        CheckIfDead();
     }
 
     public void InitializeEnemyHealth(EnemiesManager em)
@@ -36,8 +37,11 @@ public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
         if (spawnImmunityTimer <= spawnImmunity) return;
 
         health -= damage;
+    }
 
-        if (health <= 0) // maybe move this to an update function, but what other function would damage the enemy?
+    private void CheckIfDead()
+    {
+        if (health <= 0)
         {
             // signal to the manager this enemy has died
             enemyManager.EnemyDied();
@@ -50,7 +54,7 @@ public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
             }
 
             // Destroy this game object
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 }
