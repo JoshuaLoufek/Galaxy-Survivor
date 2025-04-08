@@ -107,7 +107,8 @@ public abstract class WeaponBase : MonoBehaviour
             + weaponUpgrades.damage
             // + itemBuffs
             );
-        print("Current Damage Calculated: " + currentWeaponStats.damage);
+
+        Debug.Log("Current Damage Calculated: " + currentWeaponStats.damage);
     }
     
     public virtual void CalculatePierce()
@@ -183,5 +184,4 @@ public abstract class WeaponBase : MonoBehaviour
             // + itemBuffs
             );
     }
-    
 }
