@@ -4,26 +4,26 @@ using UnityEngine;
 
 public class Money : MonoBehaviour
 {
-    int currentMoney = 0;
-
+    // int currentMoney = 0;
+    [SerializeField] DataContainer data;
     [SerializeField] TMPro.TextMeshProUGUI moneyText;
 
     public void Start()
     {
-        SetMoneyText(currentMoney);
+        SetMoneyText(data.coins);
     }
 
     public void AddMoney(int amount)
     {
-        currentMoney += amount;
-        SetMoneyText(currentMoney);
+        data.coins += amount;
+        SetMoneyText(data.coins);
     }
 
     public void SetMoneyText(int money)
     {
         if (moneyText != null)
         {
-            moneyText.text = "MONEY: " + money.ToString();
+            moneyText.text = "MONEY: " + data.coins.ToString();
         }
     }
 }
