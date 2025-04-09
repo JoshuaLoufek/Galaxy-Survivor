@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemiesManager : MonoBehaviour
 {
     [SerializeField] GameObject enemy;
+    [SerializeField] GameObject enemyAnimaton;
     [SerializeField] Vector2 spawnRect;
     [SerializeField] float spawnTimer;
     GameObject player;
