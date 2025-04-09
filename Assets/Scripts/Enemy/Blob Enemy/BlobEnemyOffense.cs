@@ -39,7 +39,7 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
 
     // UPDATE FUNCTIONS =============================================================================
 
-    void Update()
+    void FixedUpdate()
     {
         contactDamageTimer += Time.deltaTime;
 

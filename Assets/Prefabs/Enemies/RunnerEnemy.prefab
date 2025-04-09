@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1558612751013997359}
   - component: {fileID: 3705265527739850690}
   - component: {fileID: -935403016525869550}
+  - component: {fileID: 4067423246032591011}
   m_Layer: 8
   m_Name: RunnerEnemy
   m_TagString: Untagged
@@ -113,8 +114,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718adc28d5f001d4685fdc409565d92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMoveSpeed: 1
-  accelerationInterval: 1.5
+  baseMoveSpeed: 2
+  accelerationInterval: 2
+  accelerationFactor: 0.5
   contactDamage: 1
 --- !u!114 &1558612751013997359
 MonoBehaviour:
@@ -201,3 +203,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4067423246032591011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6391126077161421579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbca22504f2c9e44ad6d87af9907ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickup: {fileID: 4464463113572799029, guid: ca895ae55e6580a43877e41f0addcb98, type: 3}
+  itemDropList: []

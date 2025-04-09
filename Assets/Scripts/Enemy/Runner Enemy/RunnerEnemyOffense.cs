@@ -13,12 +13,12 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
 
     // References to this enemy
     Rigidbody2D enemyRB;
-    [SerializeField] float baseMoveSpeed = 10f;
-    [SerializeField] float accelerationInterval = 1.5f;
-    float accelerationFactor;
+    [SerializeField] float baseMoveSpeed;
+    [SerializeField] float accelerationInterval;
+    [SerializeField] float accelerationFactor;
     float accelerationTimer;
 
-    [SerializeField] int contactDamage = 1;
+    [SerializeField] int contactDamage;
     float contactDamageRate = 1f;
     float contactDamageTimer;
 
@@ -41,7 +41,7 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
 
     // UPDATE FUNCTIONS =============================================================================
 
-    void Update()
+    void FixedUpdate()
     {
         MoveEnemy();
         
@@ -51,7 +51,7 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
         if (accelerationTimer >= accelerationInterval)
         {
             accelerationTimer = 0f;
-            accelerationFactor += 1f;
+            accelerationFactor += .2f;
         }
     }
 

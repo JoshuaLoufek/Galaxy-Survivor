@@ -17,7 +17,7 @@ public class StageEventManager : MonoBehaviour
 
     private void Update()
     {
-        // Exit block when there are no more events
+        // Exit block triggered when there are no more events
         if (eventIndexer >= stageData.stageEvents.Count) { return; }
 
         // Trigger an (enemy spawn) event at the appropraite time

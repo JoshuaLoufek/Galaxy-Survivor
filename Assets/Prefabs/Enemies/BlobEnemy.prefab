@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6029443253186319744}
   - component: {fileID: 2910375841145563028}
   - component: {fileID: 7661185384468648091}
+  - component: {fileID: -2376334573001072426}
   m_Layer: 8
   m_Name: BlobEnemy
   m_TagString: Untagged
@@ -191,3 +192,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+--- !u!114 &-2376334573001072426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884229314388207233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbbca22504f2c9e44ad6d87af9907ea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickup: {fileID: 4464463113572799029, guid: ca895ae55e6580a43877e41f0addcb98, type: 3}
+  itemDropList: []

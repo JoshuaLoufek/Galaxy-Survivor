@@ -13,7 +13,7 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
 
     // References to this enemy
     Rigidbody2D enemyRB;
-    [SerializeField] float moveSpeed = 1f;
+    [SerializeField] float moveSpeed;
 
     [SerializeField] int contactDamage = 1;
     float contactDamageRate = 1f;
