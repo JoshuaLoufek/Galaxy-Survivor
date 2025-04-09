@@ -17,15 +17,17 @@ public class StageEventManager : MonoBehaviour
 
     private void Update()
     {
+        // Exit block when there are no more events
         if (eventIndexer >= stageData.stageEvents.Count) { return; }
 
+        // Trigger an (enemy spawn) event at the appropraite time
         if (stageTime.time > stageData.stageEvents[eventIndexer].time)
         {
             Debug.Log(stageData.stageEvents[eventIndexer].message);
 
-            for (int i = 0; i < stageData.stageEvents[eventIndexer].count; i++)
+            for (int i = 0; i < stageData.stageEvents[eventIndexer].enemyCount; i++)
             {
-                enemiesManager.SpawnEnemy();
+                enemiesManager.SpawnEnemy(stageData.stageEvents[eventIndexer].enemyToSpawn);
             }
 
             eventIndexer++;

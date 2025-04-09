@@ -9,7 +9,7 @@ public class StageEvent
     public float time;
     public string message;
     public Enemy enemyToSpawn;
-    public int count;
+    public int enemyCount;
 }
 
 [CreateAssetMenu]
