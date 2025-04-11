@@ -25,3 +25,7 @@ MonoBehaviour:
     message: :)
     enemyToSpawn: {fileID: 6029443253186319744, guid: db57ca939831d4d449fc2cdd57d44cfa, type: 3}
     enemyCount: 20
+  - time: 30
+    message: :)
+    enemyToSpawn: {fileID: 3610147152173676665, guid: d0c818280ababee4492f1f5d1c28202d, type: 3}
+    enemyCount: 50
