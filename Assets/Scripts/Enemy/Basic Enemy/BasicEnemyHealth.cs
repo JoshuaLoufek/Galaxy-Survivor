@@ -4,38 +4,30 @@ using UnityEngine;
 
 public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
 {
-    // GLOBAL VARIABLES =============================================================================
+    // GLOBAL VARIABLES ==========================================================================================
 
     [SerializeField] float health = 1f;
-    float spawnImmunity = 1f;
-    float spawnImmunityTimer;
 
     EnemiesManager enemyManager;
 
-    // INITIALIZATION FUNCTIONS =====================================================================
+    // INITIALIZATION FUNCTIONS ==================================================================================
 
-    private void Awake()
+    public void InitializeEnemyHealth(EnemyData enemyData, EnemiesManager em)
     {
-        spawnImmunityTimer = 0f;
-    }
-
-    private void Update()
-    {
-        spawnImmunityTimer += Time.deltaTime;
-        CheckIfDead();
-    }
-
-    public void InitializeEnemyHealth(EnemiesManager em)
-    {
+        health = enemyData.stats.health;
         enemyManager = em;
     }
 
-    // HELPER FUNCTIONS =============================================================================
+    // UPDATE FUNCTION ===========================================================================================
+
+    private void Update()
+    {
+        CheckIfDead();
+    }
+
+    // HELPER FUNCTIONS ==========================================================================================
     public void TakeDamage(float damage)
     {
-        // Don't take damage if the enemy still has spawn immunity
-        if (spawnImmunityTimer <= spawnImmunity) return;
-
         health -= damage;
     }
 
@@ -57,4 +49,6 @@ public class BasicEnemyHealth : MonoBehaviour, IDamageable, IEnemyHealth
             Destroy(gameObject);
         }
     }
+
+    
 }

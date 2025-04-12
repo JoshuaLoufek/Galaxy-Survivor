@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,5 +24,10 @@ public class DropOnDestroy : MonoBehaviour
             Debug.Log("Missing pickup prefab to drop!");
         }
         
+    }
+
+    internal void SetExpDrop(PickupExperience expDrop)
+    {
+        pickup = expDrop.gameObject;
     }
 }

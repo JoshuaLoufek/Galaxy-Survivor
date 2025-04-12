@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IEnemyHealth
 {
-    public void InitializeEnemyHealth(EnemiesManager em);
+    public void InitializeEnemyHealth(EnemyData enemyData, EnemiesManager em);
 }

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IEnemyOffense
 {
-    public void InitializeEnemyOffense(GameObject target);
+    public void InitializeEnemyOffense(EnemyData enemyData, GameObject target);
 }

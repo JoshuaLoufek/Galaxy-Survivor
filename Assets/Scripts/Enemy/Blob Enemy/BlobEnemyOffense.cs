@@ -30,8 +30,11 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
         contactDamageTimer = 0f;
     }
 
-    public void InitializeEnemyOffense(GameObject target)
+    public void InitializeEnemyOffense(EnemyData enemyData, GameObject target)
     {
+        contactDamage = enemyData.stats.damage;
+        moveForce = 500f * enemyData.stats.moveSpeed;
+
         targetGameObject = target;
         targetDestination = target.transform;
         playerHealth = target.GetComponent<PlayerHealth>();

@@ -6,14 +6,14 @@ using UnityEngine;
 [Serializable]
 public class StageEvent
 {
-    public float time;
+    public float time; // When this wave of enemies will be spawned in.
     public string message;
-    public Enemy enemyToSpawn;
-    public int enemyCount;
+    public EnemyData enemyData; // The data container that describes the Enemy and references the prefab
+    public int enemyCount; // How many enemies should be spawned
 }
 
 [CreateAssetMenu]
 public class StageData : ScriptableObject
 {
-    public List<StageEvent> stageEvents;
+    public List<StageEvent> stageEvents; // A list of stage events
 }

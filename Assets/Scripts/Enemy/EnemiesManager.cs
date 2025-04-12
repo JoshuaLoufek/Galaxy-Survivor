@@ -18,13 +18,13 @@ public class EnemiesManager : MonoBehaviour
         player = GameManager.instance.playerTransform.gameObject;
     }
 
-    public void SpawnEnemy(Enemy enemyToSpawn)
+    public void SpawnEnemy(EnemyData enemyData)
     {
         Vector3 position = GenerateRandomPosition();
 
         // Create the enemy and set it to follow and attack the player
-        GameObject newEnemy = Instantiate(enemyToSpawn.gameObject); // Create the enemy
-        newEnemy.GetComponent<Enemy>().InitializeEnemy(position, player, this); // Initialize the enemy scripts
+        GameObject newEnemy = Instantiate(enemyData.enemyPrefab); // Create the enemy
+        newEnemy.GetComponent<Enemy>().InitializeEnemy(enemyData, position, player, this); // Initialize the enemy scripts
         newEnemy.transform.parent = transform; // Set's the enemy to be a child of this object. Keeps the scene hierarchy clean.
     }
 

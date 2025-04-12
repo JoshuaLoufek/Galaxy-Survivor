@@ -16,16 +16,20 @@ MonoBehaviour:
   - time: 5
     message: Hello
     enemyToSpawn: {fileID: 3610147152173676665, guid: d0c818280ababee4492f1f5d1c28202d, type: 3}
+    enemyData: {fileID: 0}
     enemyCount: 5
   - time: 10
     message: World
     enemyToSpawn: {fileID: 6654170330617317521, guid: d3c0eb6bc90c818489da81e2cb446419, type: 3}
+    enemyData: {fileID: 0}
     enemyCount: 10
   - time: 15
     message: :)
     enemyToSpawn: {fileID: 6029443253186319744, guid: db57ca939831d4d449fc2cdd57d44cfa, type: 3}
+    enemyData: {fileID: 0}
     enemyCount: 20
   - time: 30
     message: :)
     enemyToSpawn: {fileID: 3610147152173676665, guid: d0c818280ababee4492f1f5d1c28202d, type: 3}
+    enemyData: {fileID: 0}
     enemyCount: 50

@@ -14,7 +14,6 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
     // References to this enemy
     Rigidbody2D enemyRB;
     [SerializeField] float moveSpeed;
-
     [SerializeField] int contactDamage = 1;
     float contactDamageRate = 1f;
     float ContactDamageTimer = 0f;
@@ -27,8 +26,11 @@ public class BasicEnemyOffense : MonoBehaviour, IEnemyOffense
         ContactDamageTimer = 0f;
     }
 
-    public void InitializeEnemyOffense(GameObject target)
+    public void InitializeEnemyOffense(EnemyData enemyData, GameObject target)
     {
+        contactDamage = enemyData.stats.damage;
+        moveSpeed = enemyData.stats.moveSpeed;
+
         targetGameObject = target;
         targetDestination = target.transform;
         playerHealth = target.GetComponent<PlayerHealth>();

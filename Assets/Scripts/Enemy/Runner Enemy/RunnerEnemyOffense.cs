@@ -32,8 +32,11 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
         accelerationFactor = 1f;
     }
 
-    public void InitializeEnemyOffense(GameObject target)
+    public void InitializeEnemyOffense(EnemyData enemyData, GameObject target)
     {
+        contactDamage = enemyData.stats.damage;
+        baseMoveSpeed = enemyData.stats.moveSpeed;
+
         targetGameObject = target;
         targetDestination = target.transform;
         playerHealth = target.GetComponent<PlayerHealth>();
