@@ -15,10 +15,12 @@ public enum UpgradeType
 [CreateAssetMenu]
 public class UpgradeData : ScriptableObject
 {
-    public UpgradeType upgradeType;
-    public string Name;
-    public Sprite icon;
-
+    public UpgradeType upgradeType; // How the player Level script should interpret this upgrade
+    public string Name; // The name of the upgrade
+    public string description; // A description of the upgrade
+    public int level; // The level the player needs to be for this upgrade to be avaliable to them
+    public Sprite icon; // How the upgrade is visually represented to the player
     public WeaponData weaponData; // Holds a reference to the weapon that this upgrade belongs to.
     public WeaponStats weaponUpgradeStats; // Holds the actual upgrade stats
+    public List<UpgradeData> upgradeUnlocks; // Upgrade(s) that are added to the list when this upgrade is chosen.
 }

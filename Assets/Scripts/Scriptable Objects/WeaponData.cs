@@ -9,7 +9,7 @@ public class WeaponData : ScriptableObject
     public string Name;
     public GameObject weaponPrefab;
     public WeaponStats stats;
-    public List<UpgradeData> upgrades;
+    // public List<UpgradeData> upgrades;
 }
 
 [Serializable]

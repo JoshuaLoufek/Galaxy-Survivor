@@ -13,12 +13,12 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
 
     // References to this enemy
     Rigidbody2D enemyRB;
-    [SerializeField] float baseMoveSpeed;
+    float baseMoveSpeed;
     [SerializeField] float accelerationInterval;
     [SerializeField] float accelerationFactor;
     float accelerationTimer;
 
-    [SerializeField] int contactDamage;
+    int contactDamage;
     float contactDamageRate = 1f;
     float contactDamageTimer;
 
@@ -29,7 +29,6 @@ public class RunnerEnemyOffense : MonoBehaviour, IEnemyOffense
         enemyRB = GetComponent<Rigidbody2D>();
         accelerationTimer = 0f;
         contactDamageTimer = 0;
-        accelerationFactor = 1f;
     }
 
     public void InitializeEnemyOffense(EnemyData enemyData, GameObject target)

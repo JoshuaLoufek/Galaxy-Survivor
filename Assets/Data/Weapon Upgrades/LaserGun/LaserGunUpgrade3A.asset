@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b10953e95ce67364e98c042515c7008a, type: 3}
-  m_Name: LaserGun WeaponUnlock
+  m_Name: LaserGunUpgrade3A
   m_EditorClassIdentifier: 
-  upgradeType: 0
-  Name: Laser Gun
+  upgradeType: 1
+  Name: Laser Gun Upgrade 3A
   description: 
   level: 0
-  icon: {fileID: 21300000, guid: 8bcdd0010df811b4491245148ed54a46, type: 3}
+  icon: {fileID: 21300000, guid: a45fa1380ac691a429033b5f95950bbe, type: 3}
   weaponData: {fileID: 11400000, guid: dbfe4ae9869cb3d4f86b0b2406883482, type: 2}
   weaponUpgradeStats:
     damage: 0
-    pierce: 0
+    pierce: 1
     timeToAttack: 0
     projectileSpeed: 0
-    aoe: 0
+    aoe: 0.5
     extraAttacks: 0
     attackDuration: 0
     critChance: 0
     critDamage: 0
   upgradeUnlocks:
-  - {fileID: 11400000, guid: 25e2046d402d44348a06495e915888fd, type: 2}
+  - {fileID: 11400000, guid: e3792c0cda5950b4292e4eafb29bf244, type: 2}

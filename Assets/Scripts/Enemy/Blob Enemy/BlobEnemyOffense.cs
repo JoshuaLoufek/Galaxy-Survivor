@@ -13,11 +13,11 @@ public class BlobEnemyOffense : MonoBehaviour, IEnemyOffense
 
     // References to this enemy
     Rigidbody2D enemyRB;
-    [SerializeField] float moveForce = 10f;
+    float moveForce = 10f;
     [SerializeField] float moveInterval = 3f;
     float moveTimer;
 
-    [SerializeField] int contactDamage = 1;
+     int contactDamage = 1;
     float contactDamageRate = 1f;
     float contactDamageTimer = 0f;
 

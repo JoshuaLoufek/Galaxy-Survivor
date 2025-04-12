@@ -14,7 +14,7 @@ public class PlayerWeapons : MonoBehaviour
     
     // References to other objects
     [SerializeField] Transform weaponObjectsContainer; // stores all instantiated weapons in the hierarchy
-    [SerializeField] WeaponData startingWeapon;
+    [SerializeField] UpgradeData startingWeaponUnlock;
     List<WeaponBase> aquiredWeapons;
 
     // INITIALIZATION FUNCTIONS ==================================================================================
@@ -27,26 +27,27 @@ public class PlayerWeapons : MonoBehaviour
 
     private void Start()
     {
-        AddWeapon(startingWeapon);
+        AddWeapon(startingWeaponUnlock);
     }
 
     // WEAPON MANAGEMENT FUNCTIONS ===============================================================================
 
-    public void AddWeapon(WeaponData weaponData)
+    public void AddWeapon(UpgradeData upgradeData)
     {
-        GameObject newWeapon = Instantiate(weaponData.weaponPrefab, weaponObjectsContainer);
+        GameObject newWeapon = Instantiate(upgradeData.weaponData.weaponPrefab, weaponObjectsContainer);
         WeaponBase weaponBase = newWeapon.GetComponent<WeaponBase>();
 
-        weaponBase.InitializeWeaponData(weaponData);
+        weaponBase.InitializeWeaponData(upgradeData.weaponData);
         aquiredWeapons.Add(weaponBase);
 
-        level.AddToListOfAvailableUpgrades(weaponData.upgrades);
+        level.AddToListOfAvailableUpgrades(upgradeData.upgradeUnlocks);
     }
 
     internal void UpgradeWeapon(UpgradeData upgradeData)
     {
-        WeaponBase weaponToUpgrade = aquiredWeapons.Find(wd => wd.defaultWeaponData == upgradeData.weaponData);
-        weaponToUpgrade.UpgradeWeapon(upgradeData);
+        WeaponBase weaponToUpgrade = aquiredWeapons.Find(wd => wd.defaultWeaponData == upgradeData.weaponData); // grab a reference to the weapon we're upgrading
+        weaponToUpgrade.UpgradeWeapon(upgradeData); // implement the upgrade
+        level.AddToListOfAvailableUpgrades(upgradeData.upgradeUnlocks); // add the next (set of) upgrade(s) to the list
     }
 
     // STATISTIC CALCULATOR FUNCTIONS =====================================================================================
