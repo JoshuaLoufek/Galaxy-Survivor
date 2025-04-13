@@ -28,4 +28,5 @@ MonoBehaviour:
     attackDuration: 0
     critChance: 0
     critDamage: 0
-  upgradeUnlocks: []
+  addWhenChosen: []
+  removeWhenChosen: []

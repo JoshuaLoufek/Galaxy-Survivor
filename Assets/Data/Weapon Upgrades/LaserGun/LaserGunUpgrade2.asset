@@ -28,6 +28,7 @@ MonoBehaviour:
     attackDuration: 0
     critChance: 0
     critDamage: 0
-  upgradeUnlocks:
+  addWhenChosen:
   - {fileID: 11400000, guid: e925c2e5f6eaf2f40a7a2fa21876b096, type: 2}
   - {fileID: 11400000, guid: 45c19113947ef6543add9a5aec95a497, type: 2}
+  removeWhenChosen: []
