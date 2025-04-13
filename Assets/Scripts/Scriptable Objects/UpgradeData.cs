@@ -22,5 +22,6 @@ public class UpgradeData : ScriptableObject
     public Sprite icon; // How the upgrade is visually represented to the player
     public WeaponData weaponData; // Holds a reference to the weapon that this upgrade belongs to.
     public WeaponStats weaponUpgradeStats; // Holds the actual upgrade stats
-    public List<UpgradeData> upgradeUnlocks; // Upgrade(s) that are added to the list when this upgrade is chosen.
+    public List<UpgradeData> addWhenChosen; // Upgrade(s) that are added to the list when this upgrade is chosen.
+    public List<UpgradeData> removeWhenChosen; // Upgrade(s) that should be removed from the list when this upgrade is chosen.
 }

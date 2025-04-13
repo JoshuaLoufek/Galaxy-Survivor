@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10953e95ce67364e98c042515c7008a, type: 3}
   m_Name: LaserGunUpgrade4
   m_EditorClassIdentifier: 
-  upgradeType: 0
+  upgradeType: 1
   Name: Laser Gun Upgrade 4
   description: 
   level: 0

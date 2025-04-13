@@ -40,14 +40,15 @@ public class PlayerWeapons : MonoBehaviour
         weaponBase.InitializeWeaponData(upgradeData.weaponData);
         aquiredWeapons.Add(weaponBase);
 
-        level.AddToListOfAvailableUpgrades(upgradeData.upgradeUnlocks);
+        level.AddToListOfAvailableUpgrades(upgradeData.addWhenChosen);
     }
 
     internal void UpgradeWeapon(UpgradeData upgradeData)
     {
         WeaponBase weaponToUpgrade = aquiredWeapons.Find(wd => wd.defaultWeaponData == upgradeData.weaponData); // grab a reference to the weapon we're upgrading
         weaponToUpgrade.UpgradeWeapon(upgradeData); // implement the upgrade
-        level.AddToListOfAvailableUpgrades(upgradeData.upgradeUnlocks); // add the next (set of) upgrade(s) to the list
+        level.AddToListOfAvailableUpgrades(upgradeData.addWhenChosen); // add the next (set of) upgrade(s) to the list
+        level.RemoveFromListOfAvailableUpgrades(upgradeData.removeWhenChosen); // Remove upgrades that are mutually exclusive with the chosen upgrade.
     }
 
     // STATISTIC CALCULATOR FUNCTIONS =====================================================================================

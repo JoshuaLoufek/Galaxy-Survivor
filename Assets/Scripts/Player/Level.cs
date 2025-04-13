@@ -14,7 +14,8 @@ public class Level : MonoBehaviour
 
     [SerializeField] List<UpgradeData> availableUpgrades; // Upgrades the player can currently choose from when they level up.
     [SerializeField] List<UpgradeData> acquiredUpgrades; // Upgrades the player has already recieved.
-    List<UpgradeData> selectedUpgrades;
+    List<UpgradeData> futureUpgrades; // Upgrades that the player isn't high enough level to be put in rotation yet
+    List<UpgradeData> selectedUpgrades; // Upgrades that will be presented to the player this level up
 
     [SerializeField] int upgradesPerLevel; // represents how many upgrades the player should be able to choose from each level
 
@@ -33,6 +34,10 @@ public class Level : MonoBehaviour
     private void Awake()
     {
         weaponManager = GetComponent<PlayerWeapons>();
+        // availableUpgrades = new List<UpgradeData>();// UNCOMMENT ME WHENEVER WE'RE READY TO ADD IN EVERYTHING DYNAMICALLY
+        acquiredUpgrades = new List<UpgradeData>();
+        futureUpgrades = new List<UpgradeData>();
+        selectedUpgrades = new List<UpgradeData>();
     }
 
     private void Start()
@@ -60,11 +65,15 @@ public class Level : MonoBehaviour
 
     private void LevelUp()
     {
-        if (selectedUpgrades == null) { selectedUpgrades  = new List<UpgradeData>(); }
-        selectedUpgrades.Clear();
-        selectedUpgrades.AddRange(GetUpgrades(upgradesPerLevel));
+        // Check if any future upgrades are now level appropriate for the player.
+        foreach (UpgradeData upgrade in futureUpgrades) { if (upgrade.level <= level) { availableUpgrades.Add(upgrade); } }
 
-        upgradePanelManager.OpenPanel(selectedUpgrades);
+        // Chooses which upgrades are available this level and presents them to the player
+        selectedUpgrades.Clear(); // Clear the upgrades that were selected last level up
+        selectedUpgrades.AddRange(GetUpgrades(upgradesPerLevel)); // Get the upgrades to present to the player and add them to the list
+        upgradePanelManager.OpenPanel(selectedUpgrades); // Open the upgrade menu
+
+        // Subtract the experience, increase the player's level, and update the UI
         experience -= TO_LEVEL_UP;
         level += 1;
         EXPBar.SetLevelText(level);
@@ -76,16 +85,22 @@ public class Level : MonoBehaviour
     public List<UpgradeData> GetUpgrades(int count)
     {
         List<UpgradeData> upgradeList = new List<UpgradeData>();
-        
-        if (count > availableUpgrades.Count) // if there aren't enough upgrades left, only get what we can
+
+        // if there aren't enough upgrades left, only get what we can
+        if (count > availableUpgrades.Count) { count = availableUpgrades.Count; }
+
+        for (int i = 0; i < count; i++)
         {
-            count = availableUpgrades.Count;
+            // Get an upgrade from the list of available upgrades
+            UpgradeData upgrade = availableUpgrades[Random.Range(0, availableUpgrades.Count)];
+            // Add it to the list that be presented to the player
+            upgradeList.Add(upgrade);
+            // Remove it from the list of available upgrades so that it won't be chosen twice to be presented to the player
+            availableUpgrades.Remove(upgrade);
         }
 
-        for(int i = 0; i < count; i++)
-        {
-            upgradeList.Add(availableUpgrades[Random.Range(0, availableUpgrades.Count)]);
-        }
+        // Add the upgrades chosen to be presented back to the available upgrade list 
+        availableUpgrades.AddRange(upgradeList);
 
         return upgradeList;
     }
@@ -113,13 +128,28 @@ public class Level : MonoBehaviour
             case UpgradeType.RelicUpgrade:
                 break;
         }
-
+        // Add this upgrade to the list of aquired upgrades
         acquiredUpgrades.Add(upgradeData);
+        // Remove it from the list of available upgrades
         availableUpgrades.Remove(upgradeData);
     }
 
     internal void AddToListOfAvailableUpgrades(List<UpgradeData> upgradesToAdd)
     {
-        availableUpgrades.AddRange(upgradesToAdd);
+        // Upgrades that are too high of a level aren't added to the available upgrade pool. Instead they're set aside in the future upgrade pool.
+        foreach (UpgradeData upgradeData in upgradesToAdd)
+        {
+            if (upgradeData.level <= level) { availableUpgrades.Add(upgradeData); } 
+            else { futureUpgrades.Add(upgradeData); }
+        }
+    }
+
+    internal void RemoveFromListOfAvailableUpgrades(List<UpgradeData> removeWhenChosen)
+    {
+        // Removes upgrades that are mutually exclusive with the chosen upgrade.
+        foreach (UpgradeData upgradeData in removeWhenChosen)
+        {
+            if (availableUpgrades.Contains(upgradeData)) { availableUpgrades.Remove(upgradeData); }
+        }
     }
 }
