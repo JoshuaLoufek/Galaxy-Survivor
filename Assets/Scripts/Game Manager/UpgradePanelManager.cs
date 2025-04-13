@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class UpgradePanelManager : MonoBehaviour
     PauseManager pauseManager;
 
     [SerializeField] List<UpgradeButton> upgradeButtons;
+    [SerializeField] List<TextMeshProUGUI> upgradeTitles;
+    [SerializeField] List<TextMeshProUGUI> upgradeDescriptions;
 
     private void Awake()
     {
@@ -30,6 +33,12 @@ public class UpgradePanelManager : MonoBehaviour
         {
             upgradeButtons[i].gameObject.SetActive(true);
             upgradeButtons[i].Set(upgradeDatas[i]);
+
+            upgradeTitles[i].gameObject.SetActive(true);
+            upgradeTitles[i].text = upgradeDatas[i].name;
+
+            upgradeDescriptions[i].gameObject.SetActive(true);
+            upgradeDescriptions[i].text = upgradeDatas[i].description;
         }
 
         upgradeButtons[0].gameObject.GetComponent<Button>().Select(); // sets the first button to be active by default

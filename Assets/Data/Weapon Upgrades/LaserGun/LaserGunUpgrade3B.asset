@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeType: 1
   Name: Laser Gun Upgrade 3B
-  description: 
+  description: +20% Attack Speed<br>+50% Projectile Speed
   level: 0
   icon: {fileID: 21300000, guid: 29b2e9ce0ce15664cbab789855c1ef91, type: 3}
   weaponData: {fileID: 11400000, guid: dbfe4ae9869cb3d4f86b0b2406883482, type: 2}

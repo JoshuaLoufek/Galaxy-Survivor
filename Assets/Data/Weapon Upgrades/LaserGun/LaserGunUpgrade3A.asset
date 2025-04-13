@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeType: 1
   Name: Laser Gun Upgrade 3A
-  description: 
+  description: +50% Projectile Size<br>+100% Pierce
   level: 0
   icon: {fileID: 21300000, guid: a45fa1380ac691a429033b5f95950bbe, type: 3}
   weaponData: {fileID: 11400000, guid: dbfe4ae9869cb3d4f86b0b2406883482, type: 2}
