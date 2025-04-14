@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b10953e95ce67364e98c042515c7008a, type: 3}
-  m_Name: LaserGunUpgrade4
+  m_Name: LaserGunUpgrade7
   m_EditorClassIdentifier: 
   upgradeType: 1
-  Name: Laser Gun Upgrade 4
+  Name: Laser Gun Upgrade 7
   description: +10% Damage<br>+10% Attack Speed
   level: 0
   icon: {fileID: 21300000, guid: 02bce04b9948dbe4da303614a0d6d8e4, type: 3}
@@ -29,5 +29,5 @@ MonoBehaviour:
     critChance: 0
     critDamage: 0
   addWhenChosen:
-  - {fileID: 11400000, guid: 31eb5a8d871367140a58596f1f4aff0b, type: 2}
+  - {fileID: 11400000, guid: 5e3bcf209e4f2ea4882fff9dbc1297d2, type: 2}
   removeWhenChosen: []
