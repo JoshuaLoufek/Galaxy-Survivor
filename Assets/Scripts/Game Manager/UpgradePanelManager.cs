@@ -34,10 +34,10 @@ public class UpgradePanelManager : MonoBehaviour
             upgradeButtons[i].gameObject.SetActive(true);
             upgradeButtons[i].Set(upgradeDatas[i]);
 
-            upgradeTitles[i].gameObject.SetActive(true);
+            // upgradeTitles[i].gameObject.SetActive(true);
             upgradeTitles[i].text = upgradeDatas[i].name;
 
-            upgradeDescriptions[i].gameObject.SetActive(true);
+            // upgradeDescriptions[i].gameObject.SetActive(true);
             upgradeDescriptions[i].text = upgradeDatas[i].description;
         }
 
