@@ -24,6 +24,7 @@ public class WeaponStats
     public float attackDuration;
     public float critChance;
     public float critDamage;
+    public int special; // I want this to be a unique flag that indicates some kind of greater change or evolution in weapon functionality. It wouldn't be used in AddBuffs. Instead a separate function would check the special value and implement a large change. 
 
     // Empty constructor where the stats will be filled in later
     public WeaponStats()
