@@ -57,5 +57,6 @@ public class WeaponStats
         this.attackDuration += weaponUpgradeStats.attackDuration;
         this.critChance += weaponUpgradeStats.critChance;
         this.critDamage += weaponUpgradeStats.critDamage;
+        // don't add in the "Special" buff
     }
 }
