@@ -58,5 +58,6 @@ public class WeaponStats
         this.critChance += weaponUpgradeStats.critChance;
         this.critDamage += weaponUpgradeStats.critDamage;
         // don't add in the "Special" buff
+        // Create a separate "Check" function to translate the special value into a buff
     }
 }
