@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemiesManager : MonoBehaviour
 {
-    [SerializeField] Vector2 spawnRect;
+    [SerializeField] public Vector2 spawnRect;
     GameObject player;
     int totalKills;
 
@@ -29,7 +29,7 @@ public class EnemiesManager : MonoBehaviour
     }
 
     // Determines the spawning coordinates of the enemy and ensures it's outside of the player's view on the x or y axis.
-    private Vector3 GenerateRandomPosition()
+    public Vector3 GenerateRandomPosition()
     {
         float x, y;
 
